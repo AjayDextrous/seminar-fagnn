@@ -143,8 +143,32 @@
 
 \section{Introduction}
 %TODO
-Start writing your paper here and don't forget to include citations. Example: GCN \cite{RN2}
+% Start writing your paper here and don't forget to include citations. Example: GCN \cite{RN2}
+The task of Machine Reading Comprehension, or MRC is an active area of research in the field of Natural Language Processing. 
+The basic goal of MRC is to develop systems that can read and comprehend unstructured passages and answer questions based on them. 
 
+Recently, there has been a lot of interest in the task of multi-hop reading comprehension (MHRC), 
+where the answer to a question is not directly stated in a single passage, but can be inferred by combining information from multiple documents.
+To this end, a number of datasets have been proposed, such as HotpotQA \cite{RN116}, QAngaroo \cite{RN115}, and MultiRC \cite{RN152}
+
+To solve the task of MHRC, a number of approaches have been proposed, which can be broadly classified into two categories:
+Graph-based approaches \cite{RN81} \cite{RN117} \cite{RN118} \cite{RN122} \cite{RN119} \cite{RN91} and non-graph-based approaches. Graph-based 
+approaches can be effective for this task because they enable the modeling of complex relationships between entities \cite{RN23}, and provide 
+the integration of global evidence. They can also mimic human reasoning processes \cite{RN35}.
+
+The first step in graph-based approaches is to construct either an entity graph \cite{RN81} \cite{RN117} \cite{RN122} \cite{RN141} \cite{RN91} \cite{RN130} 
+or a heirarchical graph \cite{RN124} \cite{RN119} \cite{RN130}, to model the relationships in the texts. Once this is done, a GNN-based 
+reasoning module is used to perform multi-hop reasoning over the graph, and finally a prediction module is used to predict answers \cite{RN23}.
+
+Recently however, there have been arguments as to whether GNNs are actually necessary for MHRC. Shao et al. (2020) \cite{RN127} argue that 
+a graph structure may not be necessary with proper use of pre-trained models, and that the graph structure can be regarded as task-specific 
+prior knowledge. Groenveld et al. (2020) \cite{RN126} showed that a simple BERT-based model can outperform a GNN-based model on the HotpotQA dataset,
+and that supporting sentence identification in HotpotQA might not be a multi-hop problem at all. Wu et al. (2021) \cite{RN106} suggested that
+the paragraph retrieval stage might be more important than the reasoning stage in MHRC, and that the reasoning stage might not be a multi-hop problem.
+
+In this paper, we present a survey of the various approaches that have been proposed for MHRC, with a focus on graph-based approaches. We also try to
+address the question of whether GNNs are actually necessary for MHRC. We first present a taxonomy of the various approaches, and then discuss the
+core concepts of MHRC. We then present a detailed discussion of the various approaches, and finally conclude with a discussion of the open problems.
 
 \section{Background}
 %TODO
