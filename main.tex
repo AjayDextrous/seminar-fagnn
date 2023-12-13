@@ -154,9 +154,16 @@ also include supporting facts, whose extraction could be seen as providing expla
 
 To solve the task of MHRC, a number of approaches have been proposed, which can be broadly classified into two categories:
 Graph-based approaches \cite{RN81} \cite{RN117} \cite{RN118} \cite{RN122} \cite{RN119} \cite{RN91} and Non-graph-based approaches. Most of the methods
-can be basically decomposed into a Retrieval phase and a Reading Phase \cite{RN166}. Graph-based approaches can be effective for this task because they 
+can be basically decomposed into a Retrieval phase and a Reading phase \cite{RN166}. Graph-based approaches can be effective for this task because they 
 enable the modeling of complex relationships between entities \cite{RN23}, and provide the integration of global evidence. They can also mimic human 
 reasoning processes \cite{RN35}.
+
+\begin{figure}[h] % 'h' for "here", can be replaced with other placement specifiers
+  \centering
+  \includegraphics[width=\linewidth]{fig/fig_1_hotpot_example.pdf} % Adjust 'width' as needed
+  \caption{A Sample question from the HotpotQA dataset}
+  \label{fig:yourlabel} % For referencing the figure in the text
+\end{figure}
 
 %TODO: figure of example multi-hop reasoning problem from HotpotQA
 
@@ -177,7 +184,8 @@ the paragraph retrieval stage might be more important than the reasoning stage i
 
 In this paper, we present a survey of various approaches that have been proposed for MHRC, with a focus on Graph-based approaches. We also try to
 address the question of whether GNNs are actually necessary for MHRC. We first present a taxonomy of the various approaches, and then discuss the
-core concepts of MHRC. We then present a detailed discussion of the various approaches, and finally conclude with a discussion of the open problems and future directions.
+core concepts of MHRC. We then present a detailed discussion of the various approaches, and finally conclude with a discussion of the open problems 
+and future directions.
 %TODO: contributions of survey
 
 \section{Background}
@@ -188,6 +196,17 @@ core concepts of MHRC. We then present a detailed discussion of the various appr
 
 \section{Core Concepts}
 %TODO
+\subsection{An Overview of Graph based approaches}
+For the purposes of understanding Graph based approaches, we will consider the following models:
+DFGN \cite{RN122}, HGN \cite{RN119}, CogQA \cite{RN118} and DRN \cite{RN142}. We will also compare them with 
+a couple of leading non-graph-based approaches: Beam Retriever (Current SOTA for HotpotQA Distractor Setting) \cite{RN105} and
+HopRetriever \cite{RN149}.
+
+
+\subsection{An evaluation of Graph based approaches}
+
+\subsection{Analysis of Multi-hop Datasets}
+%TODO graph based models are still pretty good in the fullwiki setting - maybe that is a potential future direction?
 
 \section{Related Work}
 %TODO
