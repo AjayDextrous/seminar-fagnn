@@ -196,14 +196,48 @@ and future directions.
 
 \section{Core Concepts}
 %TODO
-\subsection{An Overview of Graph based approaches}
+\subsection{An Overview of Current approaches}
 For the purposes of understanding Graph based approaches, we will consider the following models:
-DFGN \cite{RN122}, HGN \cite{RN119}, CogQA \cite{RN118} and DRN \cite{RN142}. We will also compare them with 
+DFGN \cite{RN122}, HGN \cite{RN119}, CogQA \cite{RN118}, Gated-RGCN \cite{RN91} and DRN \cite{RN142}. We will also compare them with 
 a couple of leading non-graph-based approaches: Beam Retriever (Current SOTA for HotpotQA Distractor Setting) \cite{RN105} and
 HopRetriever \cite{RN149}.
 
+\subsubsection{CogQA}
+The CogQA framework \cite{RN118} is a two-stage framework, based on the \emph{Dual Process Theory} of human cognition \cite{RN137}.
+The first stage is analogous to "System 1" or "Intuition", and is used to retrieve relavant information. The second stage is analogous to
+"System 2" or "Reasoning", and is used to perform multi-hop reasoning over the retrieved information. A \emph{Cognitive graph} is constructed
+using the extracted entities. System 2 then collects \emph{clues} which are used by System 1 to extract next-hop entities.
+The Cognitive graph is initialized with the entities mention in the question $\mathcal{Q}$ and they are marked as \emph{frontier nodes}.
 
-\subsection{An evaluation of Graph based approaches}
+CogQA uses BERT \cite{RN153} for System 1. Input sentences to BERT are constructed by concatenating two functional parts 
+$\text{Sentence A}$ and $\text{Sentence B}$.
+
+$$
+\underbrace{{[CLS]\: Question \: [SEP]\: clues[x; \mathcal{G}]\: [SEP]}}_{\text{Sentence A}} \underbrace{{Para[x]}}_{\text{Sentence B}}
+$$
+
+System 1 generates the semantic vector $sem[x; Q; clues]$, and pointer vectors 
+$\boldsymbol{S}_{ans} , \boldsymbol{E}_{ans} $ and $\boldsymbol{S}_{hop} , \boldsymbol{E}_{hop} $ for answer and next hop spans respectively.
+
+The primary function of System 2 is to update the hidden representations $\boldsymbol{X} \in \mathbb{R}^{n \times H}$ for all $n$ entities in $\mathcal{G}$.
+System 2 uses a variant of GNNs \cite{RN2} to perform this task. The new hidden representations $\boldsymbol{X'}$ are updated as follows:
+
+$$
+\Delta = \sigma((AD^{-1})^T \sigma (\boldsymbol{X}W_1))
+$$
+$$
+\boldsymbol{X'} = \sigma(\boldsymbol{X}W_2 + \Delta)
+$$
+
+System 2 also prepares $clues[x; \mathcal{G}]$ for System 1. Finally, a two layer fully connected network is used to predict the answer.
+$$
+answer = \underset{\text{answer node }x}{\mathrm{argmax}}  \mathcal{F}(\boldsymbol{X}[x])
+$$
+
+\subsubsection{DFGN}
+
+
+\subsection{Evaluating the effectiveness of Graph-based approaches}
 
 \subsection{Analysis of Multi-hop Datasets}
 %TODO graph based models are still pretty good in the fullwiki setting - maybe that is a potential future direction?
