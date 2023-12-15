@@ -162,10 +162,8 @@ reasoning processes \cite{RN35}.
   \centering
   \includegraphics[width=\linewidth]{fig/fig_1_hotpot_example.pdf} % Adjust 'width' as needed
   \caption{A Sample question from the HotpotQA dataset}
-  \label{fig:yourlabel} % For referencing the figure in the text
+  \label{fig:sample_hotpotqa} % For referencing the figure in the text
 \end{figure}
-
-%TODO: figure of example multi-hop reasoning problem from HotpotQA
 
 %TODO: brief description of non-graph-based approaches
 
@@ -199,7 +197,7 @@ and future directions.
 \subsection{An Overview of Current approaches}
 For the purposes of understanding Graph based approaches, we will consider the following models:
 DFGN \cite{RN122}, HGN \cite{RN119}, CogQA \cite{RN118}, Gated-RGCN \cite{RN91} and DRN \cite{RN142}. We will also compare them with 
-a couple of leading non-graph-based approaches: Beam Retriever (Current SOTA for HotpotQA Distractor Setting) \cite{RN105} and
+a couple of leading non-graph-based approaches: Beam Retriever \cite{RN105} (Current SOTA for HotpotQA Distractor Setting) and
 HopRetriever \cite{RN149}.
 
 \subsubsection{CogQA}
@@ -235,9 +233,46 @@ answer = \underset{\text{answer node }x}{\mathrm{argmax}}  \mathcal{F}(\boldsymb
 $$
 
 \subsubsection{DFGN}
+Dynamically Fused Graph Network (DFGN) \cite{RN122} constructs a \emph{dynamic entity graph}, where a dynamic local entity graph is 
+constructed for each question. It is comprised of 5 modules for paragraph selection, entity graph construction, encoding, fusion (for multi-hop reasoning),
+and a final prediction layer.
+
+The paragraph selection module for DFGN also uses a pretrained BERT-based model \cite{RN153} to select the most relavant paragraphs to the query $Q$ which 
+are then concatenated to form the context $C$. Next, the entity graph is constructed with entities as nodes. The Stanford corenlp toolkit \cite{RN170} is used 
+to extract entities from the context. Edges are added for sentence-level links, context-level links, and paragraph-level links. The query and context are 
+concatenated and passed through a BERT-based model, and further through a bi-attention layer to obtain the contextualized representations.
+
+The fusion block has 3 major steps: 1. Doc2Graph, where the text spans are converted into entity embeddings, 2. Information propogation on the entity graph and 3. Graph2Doc, where 
+information passes from the entity back to the tokens. In the 2nd step, we utilize a GNN based on Graph Attention Networks \cite{RN7} to propogate node information. The prediction layer is 
+similar to \cite{RN116}
+
+
 
 
 \subsection{Evaluating the effectiveness of Graph-based approaches}
+
+For a long while, Graph based approaches were seen as the SOTA for MHRC. However, recently, there have been arguments as to whether GNNs are actually necessary for MHRC. The best performing models 
+on the HotpotQA dataset \cite{RN116} are non-graph-based approaches \cite{RN105} \cite{RN149}. 
+
+Shao et al. (2020) \cite{RN127} argue that a graph structure may not be necessary with proper use of 
+pre-trained models, and that the graph structure can be regarded as task-specific prior knowledge. For their approach,
+they reimplement DFGN \cite{RN122} as their baseline to perform their evaluations. They use RoBERTa \cite{RN171} to retrieve paragraphs, and to encode query and context 
+A fine-tuned pre-trained BERT Model is used to extract entities from candidate paragraphs. They compare the results with the fusion block, and also by removing the fusion block and directly feeding the 
+outputs of the pre-trained layer directly to the prediction layer. They find that by using a fine-tuning approach, models with and without graph fusion block can reach almost equal results.
+
+Groenveld et al. (2020) \cite{RN126} showed that a simple BERT-based model can outperform a Graph-based model on the HotpotQA dataset.
+Their results show that a simple model that identifies relavant paragraphs independent of each other performs unexpectedly well, as compared to 
+jointly identifying the paragraphs through methods like graph networks. Their results indicate that HotpotQA might not be suitable to demonstrate the 
+value of more complex retrieval techniques, and that supporting sentence identification in HotpotQA might not be a multi-hop problem at all.
+
+Wu et al. (2021) \cite{RN106} models the multi-hop reasoning nature in the retrieval module rather than the reader module, avoiding the need for a graph-based reasoning module.
+It highlights the limitations of graph modeling for MHRC, which requires Named Entity Recognition and also requires rigid rule-based graph construction.
+They also point out that retrieval of evidence paragraphs is essentially a ranking problem rather than individual sequence classification.
+They also consider the multi-hop nature of paragaph retrieval and that secondary evidence extraction is usually dependent on the previous evidence.
+The Select-to-Guide (S2G) model outperfomed all graph-based models reaching new SOTA on HotpotQA.
+
+
+%TODO: add a table summarizing the results of the various approaches if applicable on same dataset
 
 \subsection{Analysis of Multi-hop Datasets}
 %TODO graph based models are still pretty good in the fullwiki setting - maybe that is a potential future direction?
