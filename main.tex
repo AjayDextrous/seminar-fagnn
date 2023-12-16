@@ -197,6 +197,7 @@ and future directions.
 % 1. Graph representation
 % 1.1 Node representation
 % 1.2 Edge representation
+GNNs have been effectively used for multi-hop reading comprehension, with different approaches based on the representation of entities as nodes or edges. Li (2021) \cite{RN131} introduced an Asynchronous Multi-grained Graph Network (AMGN) that represents entities and sentences as nodes, using an asynchronous update mechanism to mimic human multi-hop reading logic. In comparison to that, Tu (2019) \cite{RN124} proposed a Heterogeneous Document-Entity (HDE) graph, where entities are represented as nodes and relationships as edges, and used GNNs for reasoning over this graph. Furthermore, Zhang (2020) presented a context based Entity Graph Convolutional Network (CEG) that also represents entities as nodes, using multi-granularity encodings and surrounding context to enrich entity encoding. Gao (2023) \cite{RN136} introduced ClueReader, a heterogeneous graph attention network that represents entities as nodes and relationships as edges, and uses an attention mechanism to concentrate or alleviate information for reasoning. These studies collectively demonstrate the potential of GNNs for multi-hop reading comprehension, with the choice of entity representation as nodes or edges depending on the specific model architecture and task requirements.
 
 % 2. Graph construction
 % 2.1 Statics graphs
