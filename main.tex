@@ -213,29 +213,6 @@ Studies collectively highlight the importance of multi-hop QA in enhancing the r
 A notable development in multi-hop QA is the application of Graph Neural Networks. The multi-hop attention mechanism in GNNs, for instance, has improved information aggregation, making these 
 models more effective and accurate in complex reasoning tasks \cite{RN109}. These advancements have significantly improved the performance of multi-hop QA models, making them more effective and accurate.
 
-\subsection{Multi-hop QA Datasets}
-The advancement of multi-hop QA has been greatly facilitated by the introduction of specific datasets designed to test and refine the reasoning capabilities of AI models. 
-Notable among these are HotpotQA, WikiHop, and ComplexWebQuestions, each presenting unique challenges and features \cite{RN115}\cite{RN116}\cite{RN104}.
-These datasets have been instrumental in benchmarking the performance and progress in the field. 
-
-
-
-\begin{table*}[ht]
-  \centering
-  \begin{tabular}{|l|l|p{3cm}|p{3cm}|l|}
-  \hline
-  \textbf{Dataset}            & \textbf{Introduced by} & \textbf{Description} & \textbf{Key Features} & \textbf{Reasoning Types} \\ \hline
-  HotpotQA           & Yang et al., 2018 & A large-scale dataset requiring understanding and synthesis of information from multiple paragraphs. & Provides questions, answers, and supporting facts for explainable QA. & Comparison, bridge, intersection \\ \hline
-  WikiHop            & Welbl et al., 2018 & Constructed from Wikipedia articles, focusing on indirect inference across multiple documents. & Tests the ability to navigate and reason across linked documents. & Long-range dependencies \\ \hline
-  ComplexWebQuestions & Talmor \& Berant, 2018 & Requires performing intricate queries over a large web-scale knowledge base. & Synthesizes information from various web sources. & Web-based, domain-specific knowledge \\ \hline
-  \end{tabular}
-  \caption{Overview of Multi-hop QA Datasets}
-  \label{table:multihop_datasets}
-  \end{table*}
-  
-  
-  
-
 \subsection{Graph Neural Networks}
 
 A range of studies have contributed to the advancement of Graph Neural Networks (GNNs). These networks have emerged 
@@ -255,6 +232,27 @@ enhances the model's ability to focus on important features in the graph \cite{R
 
 GNNs have not only enriched the landscape of neural network architectures but have also opened new avenues in various domains that deal with complex relational data. Their continued evolution and integration with other AI fields makes them an interesting topic to investigate in the context of multi-hop reasoning.
 
+
+\subsection{Multi-hop QA Datasets}
+The advancement of multi-hop QA has been greatly facilitated by the introduction of specific datasets designed to test and refine the reasoning capabilities of AI models as displayed below in Table 1. 
+Notable among these are HotpotQA, WikiHop, and ComplexWebQuestions, each presenting unique challenges and features \cite{RN115}\cite{RN116}\cite{RN104}.
+These datasets have been instrumental in benchmarking the performance and progress in the field. 
+
+
+\begin{table*}[ht]
+  \centering
+  \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
+  \hline
+  \textbf{Dataset} & \textbf{Description} & \textbf{Key Features} & \textbf{Reasoning Types} \\ \hline
+  HotpotQA (Yang et al., 2018) & A large-scale dataset requiring understanding and synthesis of information from multiple paragraphs. & Provides questions, answers, and supporting facts for explainable QA. & Comparison, bridge, intersection \\ \hline
+  WikiHop (Welbl et al., 2018) & Constructed from Wikipedia articles, focusing on indirect inference across multiple documents. & Tests the ability to navigate and reason across linked documents. & Long-range dependencies \\ \hline
+  ComplexWebQuestions (Talmor \& Berant, 2018) & Requires performing intricate queries over a large web-scale knowledge base. & Synthesizes information from various web sources. & Web-based, domain-specific knowledge \\ \hline
+  \end{tabular}
+  \caption{Overview of Multi-hop QA Datasets}
+  \label{table:multihop_datasets}
+  \end{table*}
+  
+  
 \section{Taxonomy}
 %TODO Classification theme based on different characteristics of gnns
 GNNs have been effectively used for multi-hop reading comprehension, with different approaches based on certain characteristics of GNNs. In
@@ -481,6 +479,32 @@ as they have biases and reasoning shortcuts \cite{RN177}.
 
 \section{Related Work}
 %TODO
+Recent surveys in the field of Multi-hop QA have significantly advanced our understanding of the complexity and variety of tasks requiring multi-hop reasoning. 
+They provide comprehensive overviews of MHQA, from its conceptual definition to the wide range of models and datasets developed to tackle its challenges. 
+While previous surveys have separately explored aspects of GNNs or multi-hop RC, our work synergizes these domains, providing a holistic view of how GNNs can enhance multi-hop reasoning in MRC.
+Our survey bridges a gap in the current literature by focusing on the synergistic relationship between GNNs and multi-hop reading comprehension. 
+Unlike existing surveys that either cover a wide range of applications or focus on multi-hop QA in a broader sense, our work provides a focused 
+exploration of GNNs' specific role and potential in multi-hop MRC. We critically analyze their capabilities and limitations in this context, 
+offering a unique perspective on this specialized area of NLP research. 
+
+\subsection{Surveys on Multi-hop QA and GNNs in NLP}
+Existing surveys, such as those by Mavi et al., Wu et al., and Mohammadi et al., provide extensive coverage on multi-hop QA and the applications of GNNs in NLP. Mavi et al.'s survey provides a 
+broad overview of Multi-Hop QA (MHQA), defining the abstract notion of 'multiple hops' and categorizing a wide range of tasks requiring multi-hop reasoning \cite{RN165}. It emphasizes the recent 
+surge in high-quality MHQA datasets and models. Mohammadi et al. focus on recent advancements in multi-hop MRC, reviewing 31 models with a strong emphasis on their multi-hop aspects \cite{RN80}. 
+While they offer an extensive comparison of models, our work dives into the specific role of GNNs in these models, exploring how they enhance the complex reasoning required in multi-hop MRC.
+
+\subsection{GNN-focused NLP Research}
+
+Wu et al. present a broad survey on GNNs in NLP, proposing a new taxonomy for GNN research and discussing a variety of NLP applications utilizing GNNs. 
+They provide an extensive summary of GNN applications, datasets, and evaluation metrics \cite{RN23}. Another survey by Wu et al. covers an even broader range of GNN applications 
+across different machine learning tasks, presenting a taxonomy to divide the state-of-the-art graph neural networks into four categories \cite{RN16}. Our work builds up on these studies while 
+providing a more specialized exploration of GNNs within the context of multi-hop MRC 
+
+\subsection{Critical Perspectives on GNNs in QA}
+A study by Shao et al. provides a critical analysis of the necessity of graph structures in multi-hop QA. By constructing a strong baseline model, they argue that with the proper 
+use of pre-trained models, graph structures may not be crucial for multi-hop QA \cite{RN127}. Our survey acknowledges these critical perspectives but focuses on specific scenarios and tasks 
+within multi-hop MRC where GNNs offer distinct advantages.
+
 
 \section{Conclusion}
 %TODO Dive into current challenges and give a brief outlook on future work and research gaps that need to be addressed 
