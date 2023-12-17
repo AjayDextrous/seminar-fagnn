@@ -289,7 +289,14 @@ provides an alternative. Consequently, static graph approaches are hardly of rel
 % 3.1 Aggregation techniques
 % 3.2 Number of hops
 \subsection{Message Passing}
-
+Message-passing in GNNs is a crucial mechanism for multi-hop reading comprehension, enabling the integration and reasoning of information scattered across multiple documents. 
+This mechanism is pivotal in MHRC in order to arrive at a comprehensive understanding. In this context, aggregation techniques focus on nodes gathering information
+from adjacent nodes while combination practices involve nodes updating their states by combining their own features with the aggregated information. In practice,
+there are multiple examples where message passing plays an important role. We already introduced the concept of HDE graphs in MHRC, where different types of 
+nodes are utilized, and GNN-based message passing algorithms are employed to accumulate evidence \cite{RN124}. Another novel approach where the message
+passing algorithm is based on co-attention between a node and each of its neighbors is called Graph Sequential Network (GSN) \cite{RN210}. This approach is 
+successfully applied in HotpotQA and FEVER datasets. In general, relating to the graph construction, dynamic graphs, which adapt based on evolving context, 
+utilize message-passing differently compared to static graphs in MHRC settings \cite{RN171b}. 
 
 % 4. Question-graph interaction
 % 4.1 Query integration
@@ -477,6 +484,15 @@ as they have biases and reasoning shortcuts \cite{RN177}.
 
 \section{Conclusion}
 %TODO Dive into current challenges and give a brief outlook on future work and research gaps that need to be addressed 
+
+\subsection{Challenges and Limitations}
+% Scalability (handling large documents)
+% Generalizability (good performance across various domains)
+% Robustness (resistance to noisy data)
+
+\subsection{Future Directions}
+% Integration with other AI techniques (Reinforcement learning, hybrid model with other neural network architectures)
+% Advancements in GNN architectures (novel aggregation and combination techniques, enhance dynamic graphs)
 
 % add bibliography
 \bibliographystyle{ACM-Reference-Format}
