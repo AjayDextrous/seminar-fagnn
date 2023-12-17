@@ -136,7 +136,15 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  Fill in your abstract here. Summarize your paper and highlight the most important findings.
+  Multi-hop reading comprehension (MHRC)  has emerged as an important task in the field of Natural Language Processing. It requires the model to 
+  jointly reason over multiple documents to answer a question, as well as provide supporting evidence. Although Graph Neural Networks (GNNs) 
+  have been shown to be effective for this task, there have been arguments as to whether GNNs are actually necessary for MHRC.
+
+  In this paper, we attempt to present a comprehensive survey of multi-hop reading comprehension approaches with an emphasis on 
+  Graph Neural Network based approaches. We begin with a quick introduction to the MHRC task and the various approaches used to address
+  the task. We then present a taxonomy of the various approaches, and discuss the core concepts of MHRC with GNNs. We then present a detailed 
+  discussion on the effectiveness of graph-based approaches for MHRC and evaluate the current state of the art. Finally, we conclude with a 
+  discussion of the open problems and future directions.
 \end{abstract}
 
 \maketitle
@@ -269,8 +277,8 @@ interpretability and flexibility of the suggested models.
 \subsection{Graph Construction}
 Graph neural networks can be considered either static or dynamic, meaning that they can be constructed in a predetermined and unchangeable or flexible 
 and adaptable way. In literature, the discussion primarily involves dynamic GNNs. One approach called Keywords-aware Dynamic Graph Neural Network (KA-DGN)
-suggested by Jia et al. (2022) \cite{RN171} emphasizes salient information in the text, extracting keywords from the question and context to improve MHRC performance.
-The dynamic structure, in this case, allows for more adapative and responsive handling of complex questions and multiple paragraphs \cite{RN171}. In 2022, 
+suggested by Jia et al. (2022) \cite{RN171b} emphasizes salient information in the text, extracting keywords from the question and context to improve MHRC performance.
+The dynamic structure, in this case, allows for more adapative and responsive handling of complex questions and multiple paragraphs \cite{RN171b}. In 2022, 
 Tang et al. \cite{RN172} introduced Dynamically Enhanced MHRC (DeMRC) as a method aimed at low-dataset cases. DeMRC dynamically enhances the reading comprehension process,
 adapting to different datasets like the Chinese CAIL 2020 and HotpotQA. Xu et al. (2020) generally highlighting the importance of continuously inferring
 clue entities and candidate answers based on the question and clue paragraphs when using dynamic GNNs for MHRC \cite{RN173}. 
@@ -317,11 +325,21 @@ HopRetriever \cite{RN149}.
   \hline
   \multicolumn{8} { | c | }{HotpotQA Distractor Leaderboard}\\
   \hline
-  \multirow{2}{*}{\multicolumn{2}{|c|}{Model2}} & \multicolumn{2}{|c|}{Ans} & \multicolumn{2}{|c|}{Sup} & \multicolumn{2}{|c|}{Joint} \\
-  & & EM & F1 & EM & F1 & EM & F1 \\
+  \multicolumn{2} { | c | }{Model} & \multicolumn{2} { | c | }{Ans} & \multicolumn{2} { | c | }{Sup} & \multicolumn{2} { | c | }{Joint} \\
+  \multicolumn{2} { | c | }{} & EM & F1 & EM & F1 & EM & F1 \\
   \hline
-  1 & Beam Retriever \cite{RN105} & 72.69 & 85.04 & 66.25 & 90.09 & 50.53 & 77.54 \\
+  1 & \textbf{Beam Retriever} \cite{RN105} & 72.69 & 85.04 & 66.25 & 90.09 & 50.53 & 77.54 \\
   3 & Smoothing R3 (single model) \cite{RN108} & 72.07 &	84.34 &	65.44 &	89.55 &	49.73 &	76.69 \\
+  5 & R3 (single model) \cite{RN108} & 71.27	& 83.57	& 65.25	& 88.98	& 49.81	& 76.02 \\
+  6 & SAE+ (single model) \cite{RN114} & 70.74 & 83.61	& 63.70	& 88.95	& 48.15	& 75.72 \\
+  7 & S2G+EGA (single model) \cite{RN106} & 70.92	& 83.44	& 63.86	& 88.68	& 48.76	& 75.47 \\
+  8 & S2G+ (single model) \cite{RN106} & 70.72	& 83.53	& 64.30	& 88.72	& 48.60	& 75.45 \\
+  9 & \textbf{AMGN+} (single model) \cite{RN131} & 70.53	& 83.37	& 63.57	& 88.83	& 47.77	& 75.24 \\
+ 17 & HGN-large (single model) \cite{RN119} & 69.22	& 82.19	& 62.76	& 88.47	& 47.11	& 74.21 \\
+ 30 & C2F Reader (single model) \cite{RN127} & 67.98	& 81.24	& 60.81	& 87.63	& 44.67	& 72.73 \\
+ 63 & DFGN (single model) \cite{RN122} & 56.31	& 69.69	& 51.50	& 81.62	& 33.62	& 59.82 \\
+ 75 & \textbf{Baseline Model} (single model) \cite{RN116} & 45.60	& 59.02	& 20.32	& 64.49	& 10.83	& 40.16 \\
+ 
   \hline
 \end{tabular}
 \caption{The current leaderboard for the HotpotQA Distractor setting (\href{https://hotpotqa.github.io/}{link}). Certain models have been omitted for brevity.}
@@ -330,7 +348,7 @@ HopRetriever \cite{RN149}.
 
 \subsubsection{CogQA}
 The CogQA framework \cite{RN118} is a two-stage framework, based on the \emph{Dual Process Theory} of human cognition \cite{RN137}.
-The first stage is analogous to "System 1" or "Intuition", and is used to retrieve relavant information. The second stage is analogous to
+The first stage is analogous to "System 1" or "Intuition", and is used to retrieve relevant information. The second stage is analogous to
 "System 2" or "Reasoning", and is used to perform multi-hop reasoning over the retrieved information. A \emph{Cognitive graph} is constructed
 using the extracted entities. System 2 then collects \emph{clues} which are used by System 1 to extract next-hop entities.
 The Cognitive graph is initialized with the entities mention in the question $\mathcal{Q}$ and they are marked as \emph{frontier nodes}.
@@ -366,15 +384,15 @@ Dynamically Fused Graph Network (DFGN) \cite{RN122} constructs a \emph{dynamic e
 constructed for each question. It is comprised of 5 modules for paragraph selection, entity graph construction, encoding, fusion 
 (for multi-hop reasoning), and a final prediction layer.
 
-The paragraph selection module for DFGN also uses a pretrained BERT-based model \cite{RN153} to select the most relavant paragraphs to the 
+The paragraph selection module for DFGN also uses a pretrained BERT-based model \cite{RN153} to select the most relevant paragraphs to the 
 query $Q$ which are then concatenated to form the context $C$. Next, the entity graph is constructed with entities as nodes. The Stanford 
 corenlp toolkit \cite{RN170} is used to extract entities from the context. Edges are added for sentence-level links, context-level links, 
 and paragraph-level links. The query and context are concatenated and passed through a BERT-based model, and further through a bi-attention 
 layer to obtain the contextualized representations.
 
-The fusion block has 3 major steps: 1. Doc2Graph, where the text spans are converted into entity embeddings, 2. Information propogation on 
+The fusion block has 3 major steps: 1. Doc2Graph, where the text spans are converted into entity embeddings, 2. Information propagation on 
 the entity graph and 3. Graph2Doc, where information passes from the entity back to the tokens. In the 2nd step, we utilize a GNN based on 
-Graph Attention Networks \cite{RN7} to propogate node information. The prediction layer is similar to \cite{RN116}
+Graph Attention Networks \cite{RN7} to propagate node information. The prediction layer is similar to \cite{RN116}
 
 \subsubsection{HGN}
 Hierarchical Graph Network (HGN) \cite{RN119} proposes a hierarchical graph network with nodes for different granularity levels, like questions, 
@@ -403,7 +421,7 @@ are then iteratively retrieved and supporting sentences are predicted from the r
 from the supporting documents using BERT.
 
 \subsubsection{Beam Retrieval}
- Zhang et al. (2023)\cite{RN105} introduce Beam Retrieval, which is a retrieval approach that uses a beam search to retrieve the relavant 
+ Zhang et al. (2023)\cite{RN105} introduce Beam Retrieval, which is a retrieval approach that uses a beam search to retrieve the relevant 
  paragraphs. It keeps multiple hypotheses in consideration at each step, and is thus suited for questions requiring variable hop reasoning. 
  A Supervised Reader or a zero-shot LLM is used for the reading module. It achieves strong performance and has achieved SOTA on the 
  HotpotQA dataset \cite{RN116}.
@@ -430,7 +448,7 @@ attention is a special case of self-attention, which is to be noted as in the le
 to use GATs.
 
 Groenveld et al. (2020) \cite{RN126} showed that a simple BERT-based model can outperform a Graph-based model on the HotpotQA dataset.
-Their results show that a simple model that identifies relavant paragraphs independent of each other performs unexpectedly well, as compared to 
+Their results show that a simple model that identifies relevant paragraphs independent of each other performs unexpectedly well, as compared to 
 jointly identifying the paragraphs through methods like graph networks. Their results indicate that HotpotQA might not be suitable to 
 demonstrate the value of more complex retrieval techniques, and that supporting sentence identification in HotpotQA might not be a multi-hop 
 problem at all.
@@ -438,8 +456,8 @@ problem at all.
 Wu et al. (2021) \cite{RN106} models the multi-hop reasoning nature in the retrieval module rather than the reader module, avoiding the need 
 for a graph-based reasoning module. It highlights the limitations of graph modeling for MHRC, which requires Named Entity Recognition and 
 also requires rigid rule-based graph construction. They also point out that retrieval of evidence paragraphs is essentially a ranking problem 
-rather than individual sequence classification. They also consider the multi-hop nature of paragaph retrieval and that secondary evidence 
-extraction is usually dependent on the previous evidence. The Select-to-Guide (S2G) model outperfomed all graph-based models reaching new 
+rather than individual sequence classification. They also consider the multi-hop nature of paragraph retrieval and that secondary evidence 
+extraction is usually dependent on the previous evidence. The Select-to-Guide (S2G) model outperformed all graph-based models reaching new 
 SOTA on HotpotQA.
 
 
