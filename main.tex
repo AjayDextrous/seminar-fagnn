@@ -269,8 +269,8 @@ interpretability and flexibility of the suggested models.
 \subsection{Graph Construction}
 Graph neural networks can be considered either static or dynamic, meaning that they can be constructed in a predetermined and unchangeable or flexible 
 and adaptable way. In literature, the discussion primarily involves dynamic GNNs. One approach called Keywords-aware Dynamic Graph Neural Network (KA-DGN)
-suggested by Jia et al. (2022) \cite{RN171} emphasizes salient information in the text, extracting keywords from the question and context to improve MHRC performance.
-The dynamic structure, in this case, allows for more adapative and responsive handling of complex questions and multiple paragraphs \cite{RN171}. In 2022, 
+suggested by Jia et al. (2022) \cite{RN171b} emphasizes salient information in the text, extracting keywords from the question and context to improve MHRC performance.
+The dynamic structure, in this case, allows for more adapative and responsive handling of complex questions and multiple paragraphs \cite{RN171b}. In 2022, 
 Tang et al. \cite{RN172} introduced Dynamically Enhanced MHRC (DeMRC) as a method aimed at low-dataset cases. DeMRC dynamically enhances the reading comprehension process,
 adapting to different datasets like the Chinese CAIL 2020 and HotpotQA. Xu et al. (2020) generally highlighting the importance of continuously inferring
 clue entities and candidate answers based on the question and clue paragraphs when using dynamic GNNs for MHRC \cite{RN173}. 
@@ -317,11 +317,23 @@ HopRetriever \cite{RN149}.
   \hline
   \multicolumn{8} { | c | }{HotpotQA Distractor Leaderboard}\\
   \hline
-  \multirow{2}{*}{\multicolumn{2}{|c|}{Model2}} & \multicolumn{2}{|c|}{Ans} & \multicolumn{2}{|c|}{Sup} & \multicolumn{2}{|c|}{Joint} \\
-  & & EM & F1 & EM & F1 & EM & F1 \\
+  \multicolumn{2} { | c | }{Model} & \multicolumn{2} { | c | }{Ans} & \multicolumn{2} { | c | }{Sup} & \multicolumn{2} { | c | }{Joint} \\
+  \multicolumn{2} { | c | }{} & EM & F1 & EM & F1 & EM & F1 \\
   \hline
-  1 & Beam Retriever \cite{RN105} & 72.69 & 85.04 & 66.25 & 90.09 & 50.53 & 77.54 \\
+  1 & \textbf{Beam Retriever} \cite{RN105} & 72.69 & 85.04 & 66.25 & 90.09 & 50.53 & 77.54 \\
   3 & Smoothing R3 (single model) \cite{RN108} & 72.07 &	84.34 &	65.44 &	89.55 &	49.73 &	76.69 \\
+  5 & R3 (single model) \cite{RN108} & 71.27	& 83.57	& 65.25	& 88.98	& 49.81	& 76.02 \\
+  6 & SAE+ (single model) \cite{RN114} & 70.74 & 83.61	& 63.70	& 88.95	& 48.15	& 75.72 \\
+  7 & S2G+EGA (single model) \cite{RN106} & 70.92	& 83.44	& 63.86	& 88.68	& 48.76	& 75.47 \\
+  8 & S2G+ (single model) \cite{RN106} & 70.72	& 83.53	& 64.30	& 88.72	& 48.60	& 75.45 \\
+  9 & \textbf{AMGN+} (single model) \cite{RN131} & 70.53	& 83.37	& 63.57	& 88.83	& 47.77	& 75.24 \\
+ 17 & HGN-large (single model) \cite{RN119} & 69.22	& 82.19	& 62.76	& 88.47	& 47.11	& 74.21 \\
+ 30 & C2F Reader (single model) \cite{RN127} & 67.98	& 81.24	& 60.81	& 87.63	& 44.67	& 72.73 \\
+ 63 & DFGN (single model) \cite{RN122} & 56.31	& 69.69	& 51.50	& 81.62	& 33.62	& 59.82 \\
+ 75 & \textbf{Baseline Model} (single model) \cite{RN116} & 45.60	& 59.02	& 20.32	& 64.49	& 10.83	& 40.16 \\
+ 
+
+
   \hline
 \end{tabular}
 \caption{The current leaderboard for the HotpotQA Distractor setting (\href{https://hotpotqa.github.io/}{link}). Certain models have been omitted for brevity.}
