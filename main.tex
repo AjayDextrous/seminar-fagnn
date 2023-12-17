@@ -285,9 +285,6 @@ clue entities and candidate answers based on the question and clue paragraphs wh
 As opposed to dynamic graphs, a static construction of graphs cannot deal with new or unexpected relationships in the data and hence hardly
 provides an alternative. Consequently, static graph approaches are hardly of relevance in existing literature. 
 
-% 3. Message passing
-% 3.1 Aggregation techniques
-% 3.2 Number of hops
 \subsection{Message Passing}
 Message-passing in GNNs is a crucial mechanism for multi-hop reading comprehension, enabling the integration and reasoning of information scattered across multiple documents. 
 This mechanism is pivotal in MHRC in order to arrive at a comprehensive understanding. In this context, aggregation techniques focus on nodes gathering information
@@ -298,24 +295,40 @@ passing algorithm is based on co-attention between a node and each of its neighb
 successfully applied in HotpotQA and FEVER datasets. In general, relating to the graph construction, dynamic graphs, which adapt based on evolving context, 
 utilize message-passing differently compared to static graphs in MHRC settings \cite{RN171b}. 
 
-% 4. Question-graph interaction
-% 4.1 Query integration
-% 4.2 Dynamic query graphs
-\subsection{Question-Graph Interaction}
+\subsection{GNN Architectures}
+In the domain of GNNs, there are different architectures that offer diverse approaches for tackling the challenges in MHRC, each with unique strengths
+in processing graph-structured data. The continuous evolution and hybridization of these models open new possibilities for advancing the field of MHRC. In
+the following, we will discuss a few of them. Firstly, we mentioned the principle of GCNs before which is a key example for a Convolutional Graph 
+Neural Network (ConvGNN) architecture. ConvGNNs utilize a convolutional process on graphs where the focus is on aggregating information from a node's 
+immediate neighbors. Secondly, graph processing can also be done in a recurrent manner, allowing for the capture of information from wider graph 
+neighborhoods over iterations, as displayed by the Recurrent Graph Neural Networks (RGNNs) architecture. An example of RecGNNs is the Graph Recurrent
+Network (GRN), which iteratively updates node representations and is effective in tasks requiring long-range dependencies \cite{RN211}. When it comes to
+selective focus on important nodes and edges for emphasizing key information, Attention-based Graph Neural Networks are a popular architecture concept. 
+The Graph Attention Network (GAT) by Veličković et al. (2018) is a prominent model that uses attention mechanisms to weigh the influence of neighboring
+nodes during aggregation \cite{RN7}. Recent advancements include hybrid models that combine different GNN architectures or integrate GNNs with other neural
+network types for enhanced performance. For instance, a study by Xu et al. (2018) proposes a novel approach that combines the strengths of ConvGNNs 
+and RecGNNs, providing improved capabilities for complex graph structures \cite{RN15}.
 
-% 5. Memory augmented models
-% 5.1 Graph memory networks
-\subsection{Memory Augmented Models}
+\subsection{Dataset and Task Type}
+The ability of GNNs to handle different types of questions and datasets makes them particularly versatile for MHRC tasks. Specifically for factoid question
+answering which involves questions that require factual, often concise, answers, GNNs are used to connect disparate pieces of information from various texts
+to answer these questions \cite{RN116}. In comparison to that, complex reasoning tasks require synthesizing information from various sources to answer 
+questions that involve inference, deduction, or contradiction. The QAngaroo dataset, specifically designed for multi-hop reasoning over knowledge graphs, 
+serves as an excellent example of a complex reasoning task \cite{RN212}. GNNs in this context help in navigating the knowledge graph to infer answers.
 
-% 6. Datasets and Evaluation metrics
-% 6.1 Benchmark datasets
-% 6.2 Evaluation metrics
-\subsection{Datasets and Evaluation Metrics}
+\subsection{Evaluation and Performance Metrics}
+Accurate and interpretable evaluation metrics are essential for assessing and improving the performance of GNNs in MHRC, guiding future advancements in the field.
+Evaluation of models on the HotpotQA dataset demonstrate accuracy metrics such as F1 score and Exact Match \cite{RN116}. The F1 score considers both precision 
+and recall, making it suitable for imbalanced datasets, while Exact Match requires the model's response to exactly match the correct answer \cite{RN116}.
+In comparison to that, interpretability metrics assess how well the model's decision-making process can be understood which is crucial for reliability reasons.
+Research on GNN interpretability, such as GNNExplainer \cite{RN213}, provides insight into how these models arrive at their conclusions, enhancing the transparency of MHRC models.
 
-% 7. Comparative Analysis
-% 7.1 Comparison with Non-GNN approaches
-\subsection{Comparative Analysis}
-The study by Wu et al. (2021) \cite{RN106} proposes a graph-free model using a select-to-guide strategy, which outperforms all graph models on MHRC.
+\subsection{Application Domains}
+The flexibility of GNNs in handling different types of data makes them suitable for both domain-specific and general-purpose MHRC, 
+demonstrating their versatility across various application domains. An example for domain-specific application includes the use of GNNs in biomedical literature for MHRC tasks, 
+where they help in deciphering complex interactions and relations \cite{RN129}. Understanding the context and connections between entities is instrumental 
+when it comes to scientific literature or legal documents. A study on the use of GNNs in the HotpotQA dataset, a general-purpose MHRC benchmark, 
+illustrates their effectiveness also in broader applications \cite{RN116}.
 
 \section{Core Concepts}
 %TODO
@@ -483,16 +496,30 @@ as they have biases and reasoning shortcuts \cite{RN177}.
 %TODO
 
 \section{Conclusion}
-%TODO Dive into current challenges and give a brief outlook on future work and research gaps that need to be addressed 
+In this survey paper, we have undertaken a comprehensive exploration of the evolving landscape of multiple-hop reading comprehension approaches
+employing Graph Neural Networks. The incorporation of GNNs in reading comprehension tasks has not only propelled the field forward but has 
+also addressed various complex scenarios where answers require reasoning over multiple pieces of information scattered throughout the text. 
+Throughout this survey, we have examined the key methodologies, innovations, challenges, and future directions that shape this dynamic research domain.
+
+Key achievements as of now include the fact that GNNs have improved the accuracy of multi-hop reasoning by effectively capturing 
+relationships between different entities and their attributes in texts. Notably the architectural strengths of GNNs in handling sequential data in texts
+are essential in this domain \cite{RN23}. 
 
 \subsection{Challenges and Limitations}
-% Scalability (handling large documents)
-% Generalizability (good performance across various domains)
-% Robustness (resistance to noisy data)
+Despite significant progress, several challenges and limitations persist in the field of multiple-hop reading comprehension with GNNs.
+Firstly, high-quality, diverse datasets for training are limited since existing datasets often come with limitations in terms of scale, 
+diversity, and quality \cite{RN214}. The creation of datasets like HotpotQA has been instrumental, but the diversity and complexity of real-world 
+scenarios are still underrepresented. Secondly, current models struggle with generalizing to unseen data or different types of questions, as pointed out by
+Tang et al. (2020) \cite{RN215}. Thirdly, GNNs, particularly in multi-hop settings, require significant computational resources, 
+which can be a bottleneck for large-scale applications and hence, scalability in general \cite{RN216}. Additionally, understanding how GNN-based models 
+make decisions in multi-hop comprehension remains challenging.
 
 \subsection{Future Directions}
-% Integration with other AI techniques (Reinforcement learning, hybrid model with other neural network architectures)
-% Advancements in GNN architectures (novel aggregation and combination techniques, enhance dynamic graphs)
+As mentioned above, the lack of diverse and complex datasets hinders the development of more robust models. Therefore, future research should 
+focus on mirroring real-world scenarios in order to retrieve more valuable datasets like HotpotQA. Furthermore, other limitations like model efficiency and 
+cross-domain generalization require additional research efforts to improve the use of GNNs in the context of MHRC. Another interesting aspect would 
+involve combining insights from cognitive science and linguistics with GNNs which could lead to more intuitive models. In general, 
+ensuring the explainability of these models and addressing ethical concerns is paramount in order to maintain a certain level of explainability. 
 
 % add bibliography
 \bibliographystyle{ACM-Reference-Format}
