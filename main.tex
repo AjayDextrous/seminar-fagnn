@@ -189,10 +189,118 @@ the open problems and future directions.
 %TODO: contributions of survey
 
 \section{Background}
+In this section we intruduce the core concepts of multi-hop reasoning and graph neural networks that prior research has established.  
+
 %TODO
+\subsection{Machine Reading Comprehension and Multi-hop QA}
+The goal of MRC is to enable machines to answer questions based on a given text or set of texts, requiring a deep understanding of both the content and context of the input material, which 
+requires advanced NLP techniques, such as semantic analysis, context understanding, and language modeling \cite{RN208}. MRC represents a significant challenge in AI and NLP, as it requires systems to not only process language but also to comprehend and infer meaning in a way comparable to human understanding.
+
+Multi-hop question answering (QA) is a challanging aspect of MRC that requires multi-step reasoning over multiple passages to find the answer and supporting evidence \cite{RN165}.
+It is a crucial component of natural language processing (NLP) and AI systems, with a wide range of applications, as it requires models to connect multiple pieces of 
+evidence to answer complex questions. Therefore, it can be used for tasks such as document and timeline summarization \cite{RN202} \cite{RN201}.
+To improve the performance of multi-hop QA models, different model architectures such as hybrid models or TransferNet, which supports both label and text relations in a unified framework \cite{RN164} \cite{RN133}. 
+The development of better models was further encouraged through the availability of high quality data sets \cite{RN116} \cite{RN115}
+Studies collectively highlight the importance of multi-hop QA in enhancing the reasoning and inference skills of NLP models across various domains. 
+A notable development in multi-hop QA is the application of Graph Neural Networks. The multi-hop attention mechanism in GNNs, for instance, has improved information aggregation, making these 
+models more effective and accurate in complex reasoning tasks \cite{RN109}. These advancements have significantly improved the performance of multi-hop QA models, making them more effective and accurate.
+
+\subsection{Multi-hop QA Datasets}
+The advancement of multi-hop QA has been greatly facilitated by the introduction of specific datasets designed to test and refine the reasoning capabilities of AI models. 
+Notable among these are HotpotQA, WikiHop, and ComplexWebQuestions, each presenting unique challenges and features \cite{RN115}\cite{RN116}\cite{RN104}.
+These datasets have been instrumental in benchmarking the performance and progress in the field. 
+
+
+
+\begin{table*}[ht]
+  \centering
+  \begin{tabular}{|l|l|p{3cm}|p{3cm}|l|}
+  \hline
+  \textbf{Dataset}            & \textbf{Introduced by} & \textbf{Description} & \textbf{Key Features} & \textbf{Reasoning Types} \\ \hline
+  HotpotQA           & Yang et al., 2018 & A large-scale dataset requiring understanding and synthesis of information from multiple paragraphs. & Provides questions, answers, and supporting facts for explainable QA. & Comparison, bridge, intersection \\ \hline
+  WikiHop            & Welbl et al., 2018 & Constructed from Wikipedia articles, focusing on indirect inference across multiple documents. & Tests the ability to navigate and reason across linked documents. & Long-range dependencies \\ \hline
+  ComplexWebQuestions & Talmor \& Berant, 2018 & Requires performing intricate queries over a large web-scale knowledge base. & Synthesizes information from various web sources. & Web-based, domain-specific knowledge \\ \hline
+  \end{tabular}
+  \caption{Overview of Multi-hop QA Datasets}
+  \label{table:multihop_datasets}
+  \end{table*}
+  
+  
+  
+
+\subsection{Graph Neural Networks}
+
+A range of studies have contributed to the advancement of Graph Neural Networks (GNNs). These networks have emerged 
+as a powerful tool for machine learning on graph-structured data, extending the capabilities of traditional neural networks to complex relationships and 
+interdependencies encoded in graphs. The work of Gori et al. \cite{RN203} and Scarselli et al. \cite{RN204}, who proposed a framework for applying neural networks directly to graphs 
+layed the foundation for further developments in that field.
+
+GNNs are designed to capture the relational information inherent in the graphical representation of data \cite{RN205}. This makes them particularly 
+well-suited for applications where data points are interrelated, such as social networks, molecular structures, and communication networks \cite{RN206}.
+
+A core principle of GNNs lies in their ability to learn representations for nodes by incorporating neighborhood information. Through mechanisms such as neighborhood aggregation or message passing, nodes update their 
+representations by adapting features from adjacent nodes \cite{RN207}. This iterative process facilitates information flow across the network, enabling the GNN to capture complex 
+relational patterns \cite{RN15}. One of the most prominent variants of GNNs is the Graph Convolutional Network (GCN), introduced by Kipf and Welling (2016). 
+GCNs generalize the concept of convolution from grid-like data (e.g., images) to graphs, enabling efficient feature extraction from graph data \cite{RN209}. Another notable variant is the 
+Graph Attention Network (GAT), introduced by Veličković et al. (2018). GATs incorporate attention mechanisms in the aggregation process, allowing for more nuanced weighting of neighbor contributions, which 
+enhances the model's ability to focus on important features in the graph \cite{RN7}.
+
+GNNs have not only enriched the landscape of neural network architectures but have also opened new avenues in various domains that deal with complex relational data. Their continued evolution and integration with other AI fields makes them an interesting topic to investigate in the context of multi-hop reasoning.
 
 \section{Taxonomy}
-%TODO
+%TODO Classification theme based on different characteristics of gnns
+GNNs have been effectively used for multi-hop reading comprehension, with different approaches based on certain characteristics of GNNs. In
+the following, we will analyze multiple classification schemes and evaluate implemented methods building on attributes of GNNs. 
+
+\subsection{Graph Representation}
+Firstly, GNNS can be considered as representation of entities. More specifically, these entities can be associated with nodes, edges or hybrid versions. 
+Li et al. (2021) \cite{RN131} introduced an Asynchronous Multi-grained Graph Network (AMGN) that represents entities and sentences as nodes, using an asynchronous 
+update mechanism to mimic human multi-hop reading logic. In comparison to that, Tu et al. (2019) \cite{RN124} proposed a Heterogeneous Document-Entity (HDE) 
+graph, where entities are represented as nodes and relationships as edges, and used GNNs for reasoning over this graph. Furthermore, Zhang et al. (2020) \cite{RN170} presented 
+a context based Entity Graph Convolutional Network (CEG) that also represents entities as nodes, using various granularity levels of encodings and surrounding context 
+to enrich entity encoding. Gao et al. (2023) \cite{RN136} introduced ClueReader, a heterogeneous graph attention network that represents entities as nodes and
+relationships as edges, and uses an attention mechanism to assemble semantic features in multi-angle representations. Gao also mentions Entity-Graph 
+Convolutional Network (GCN) and BAG models that focus on extracting text spans matching candidates as nodes and use contextualized word embeddings
+for node representations \cite{RN136}. These studies collectively demonstrate the potential versatility of GNNs for multi-hop reading comprehension, with the
+choice of entity representation as nodes or edges depending on the specific model architecture and task requirements. We find that GNNs can be adapted
+to represent complex relationships between entities, documents and answer candidates in multi-hop reasoning tasks. Challenges remain in the 
+interpretability and flexibility of the suggested models.
+
+\subsection{Graph Construction}
+Graph neural networks can be considered either static or dynamic, meaning that they can be constructed in a predetermined and unchangeable or flexible 
+and adaptable way. In literature, the discussion primarily involves dynamic GNNs. One approach called Keywords-aware Dynamic Graph Neural Network (KA-DGN)
+suggested by Jia et al. (2022) \cite{RN171} emphasizes salient information in the text, extracting keywords from the question and context to improve MHRC performance.
+The dynamic structure, in this case, allows for more adapative and responsive handling of complex questions and multiple paragraphs \cite{RN171}. In 2022, 
+Tang et al. \cite{RN172} introduced Dynamically Enhanced MHRC (DeMRC) as a method aimed at low-dataset cases. DeMRC dynamically enhances the reading comprehension process,
+adapting to different datasets like the Chinese CAIL 2020 and HotpotQA. Xu et al. (2020) generally highlighting the importance of continuously inferring
+clue entities and candidate answers based on the question and clue paragraphs when using dynamic GNNs for MHRC \cite{RN173}. 
+As opposed to dynamic graphs, a static construction of graphs cannot deal with new or unexpected relationships in the data and hence hardly
+provides an alternative. Consequently, static graph approaches are hardly of relevance in existing literature. 
+
+% 3. Message passing
+% 3.1 Aggregation techniques
+% 3.2 Number of hops
+\subsection{Message Passing}
+
+
+% 4. Question-graph interaction
+% 4.1 Query integration
+% 4.2 Dynamic query graphs
+\subsection{Question-Graph Interaction}
+
+% 5. Memory augmented models
+% 5.1 Graph memory networks
+\subsection{Memory Augmented Models}
+
+% 6. Datasets and Evaluation metrics
+% 6.1 Benchmark datasets
+% 6.2 Evaluation metrics
+\subsection{Datasets and Evaluation Metrics}
+
+% 7. Comparative Analysis
+% 7.1 Comparison with Non-GNN approaches
+\subsection{Comparative Analysis}
+The study by Wu et al. (2021) \cite{RN106} proposes a graph-free model using a select-to-guide strategy, which outperforms all graph models on MHRC.
 
 \section{Core Concepts}
 %TODO
@@ -350,7 +458,7 @@ as they have biases and reasoning shortcuts \cite{RN177}.
 %TODO
 
 \section{Conclusion}
-%TODO
+%TODO Dive into current challenges and give a brief outlook on future work and research gaps that need to be addressed 
 
 % add bibliography
 \bibliographystyle{ACM-Reference-Format}
