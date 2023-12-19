@@ -197,45 +197,54 @@ the open problems and future directions.
 %TODO: contributions of survey
 
 \section{Background}
-In this section we intruduce the core concepts of multi-hop reasoning and graph neural networks that prior research has established.  
+In this section we introduce the core concepts of multi-hop reasoning and graph neural networks that prior research has established.  
 
 %TODO
 \subsection{Machine Reading Comprehension and Multi-hop QA}
-The goal of MRC is to enable machines to answer questions based on a given text or set of texts, requiring a deep understanding of both the content and context of the input material, which 
-requires advanced NLP techniques, such as semantic analysis, context understanding, and language modeling \cite{RN208}. MRC represents a significant challenge in AI and NLP, as it requires systems to not only process language but also to comprehend and infer meaning in a way comparable to human understanding.
+The goal of MRC is to enable machines to answer questions based on a given text or set of texts, requiring a deep understanding of both the 
+content and context of the input material, which requires advanced NLP techniques, such as semantic analysis, context understanding, and 
+language modeling \cite{RN208}. MRC represents a significant challenge in AI and NLP, as it requires systems to not only process language 
+but also to comprehend and infer meaning in a way comparable to human understanding.
 
-Multi-hop question answering (QA) is a challanging aspect of MRC that requires multi-step reasoning over multiple passages to find the answer and supporting evidence \cite{RN165}.
-It is a crucial component of natural language processing (NLP) and AI systems, with a wide range of applications, as it requires models to connect multiple pieces of 
-evidence to answer complex questions. Therefore, it can be used for tasks such as document and timeline summarization \cite{RN202} \cite{RN201}.
-To improve the performance of multi-hop QA models, different model architectures such as hybrid models or TransferNet, which supports both label and text relations in a unified framework \cite{RN164} \cite{RN133}. 
+Multi-hop question answering (QA) is a challenging aspect of MRC that requires multi-step reasoning over multiple passages to find the answer 
+and supporting evidence \cite{RN165}. It is a crucial component of natural language processing (NLP) and AI systems, with a wide range of applications, 
+as it requires models to connect multiple pieces of evidence to answer complex questions. Therefore, it can be used for tasks such as document 
+and timeline summarization \cite{RN202} \cite{RN201}. To improve the performance of multi-hop QA models, different model architectures such 
+as hybrid models or TransferNet, which supports both label and text relations in a unified framework \cite{RN164} \cite{RN133}. 
 The development of better models was further encouraged through the availability of high quality data sets \cite{RN116} \cite{RN115}
 Studies collectively highlight the importance of multi-hop QA in enhancing the reasoning and inference skills of NLP models across various domains. 
-A notable development in multi-hop QA is the application of Graph Neural Networks. The multi-hop attention mechanism in GNNs, for instance, has improved information aggregation, making these 
-models more effective and accurate in complex reasoning tasks \cite{RN109}. These advancements have significantly improved the performance of multi-hop QA models, making them more effective and accurate.
+A notable development in multi-hop QA is the application of Graph Neural Networks. The multi-hop attention mechanism in GNNs, for instance, 
+has improved information aggregation, making these models more effective and accurate in complex reasoning tasks \cite{RN109}. These advancements 
+have significantly improved the performance of multi-hop QA models, making them more effective and accurate.
 
 \subsection{Graph Neural Networks}
 
 A range of studies have contributed to the advancement of Graph Neural Networks (GNNs). These networks have emerged 
-as a powerful tool for machine learning on graph-structured data, extending the capabilities of traditional neural networks to complex relationships and 
-interdependencies encoded in graphs. The work of Gori et al. \cite{RN203} and Scarselli et al. \cite{RN204}, who proposed a framework for applying neural networks directly to graphs 
-layed the foundation for further developments in that field.
+as a powerful tool for machine learning on graph-structured data, extending the capabilities of traditional neural networks to complex relationships 
+and interdependencies encoded in graphs. The work of Gori et al. \cite{RN203} and Scarselli et al. \cite{RN204}, who proposed a framework for 
+applying neural networks directly to graphs laid the foundation for further developments in that field.
 
 GNNs are designed to capture the relational information inherent in the graphical representation of data \cite{RN205}. This makes them particularly 
 well-suited for applications where data points are interrelated, such as social networks, molecular structures, and communication networks \cite{RN206}.
 
-A core principle of GNNs lies in their ability to learn representations for nodes by incorporating neighborhood information. Through mechanisms such as neighborhood aggregation or message passing, nodes update their 
-representations by adapting features from adjacent nodes \cite{RN207}. This iterative process facilitates information flow across the network, enabling the GNN to capture complex 
-relational patterns \cite{RN15}. One of the most prominent variants of GNNs is the Graph Convolutional Network (GCN), introduced by Kipf and Welling (2016). 
-GCNs generalize the concept of convolution from grid-like data (e.g., images) to graphs, enabling efficient feature extraction from graph data \cite{RN209}. Another notable variant is the 
-Graph Attention Network (GAT), introduced by Veličković et al. (2018). GATs incorporate attention mechanisms in the aggregation process, allowing for more nuanced weighting of neighbor contributions, which 
-enhances the model's ability to focus on important features in the graph \cite{RN7}.
+A core principle of GNNs lies in their ability to learn representations for nodes by incorporating neighborhood information. Through mechanisms 
+such as neighborhood aggregation or message passing, nodes update their representations by adapting features from adjacent nodes \cite{RN207}. 
+This iterative process facilitates information flow across the network, enabling the GNN to capture complex relational patterns \cite{RN15}. 
+One of the most prominent variants of GNNs is the Graph Convolutional Network (GCN), introduced by Kipf and Welling (2016). GCNs generalize 
+the concept of convolution from grid-like data (e.g., images) to graphs, enabling efficient feature extraction from graph data \cite{RN209}. 
+Another notable variant is the Graph Attention Network (GAT), introduced by Veličković et al. (2018). GATs incorporate attention mechanisms 
+in the aggregation process, allowing for more nuanced weighting of neighbor contributions, which enhances the model's ability to focus on 
+important features in the graph \cite{RN7}.
 
-GNNs have not only enriched the landscape of neural network architectures but have also opened new avenues in various domains that deal with complex relational data. Their continued evolution and integration with other AI fields makes them an interesting topic to investigate in the context of multi-hop reasoning.
+GNNs have not only enriched the landscape of neural network architectures but have also opened new avenues in various domains that deal with 
+complex relational data. Their continued evolution and integration with other AI fields makes them an interesting topic to investigate in 
+the context of multi-hop reasoning.
 
 
 \subsection{Multi-hop QA Datasets}
-The advancement of multi-hop QA has been greatly facilitated by the introduction of specific datasets designed to test and refine the reasoning capabilities of AI models as displayed below in Table 1. 
-Notable among these are HotpotQA, WikiHop, and ComplexWebQuestions, each presenting unique challenges and features \cite{RN115}\cite{RN116}\cite{RN104}.
+The advancement of multi-hop QA has been greatly facilitated by the introduction of specific datasets designed to test and refine the reasoning 
+capabilities of AI models as displayed below in Table 1. Notable among these are HotpotQA, WikiHop, and ComplexWebQuestions, each presenting 
+unique challenges and features \cite{RN115}\cite{RN116}\cite{RN104}.
 These datasets have been instrumental in benchmarking the performance and progress in the field. 
 
 
@@ -276,7 +285,7 @@ interpretability and flexibility of the suggested models.
 Graph neural networks can be considered either static or dynamic, meaning that they can be constructed in a predetermined and unchangeable or flexible 
 and adaptable way. In literature, the discussion primarily involves dynamic GNNs. One approach called Keywords-aware Dynamic Graph Neural Network (KA-DGN)
 suggested by Jia et al. (2022) \cite{RN171b} emphasizes salient information in the text, extracting keywords from the question and context to improve MHRC performance.
-The dynamic structure, in this case, allows for more adapative and responsive handling of complex questions and multiple paragraphs \cite{RN171b}. In 2022, 
+The dynamic structure, in this case, allows for more adaptive and responsive handling of complex questions and multiple paragraphs \cite{RN171b}. In 2022, 
 Tang et al. \cite{RN172} introduced Dynamically Enhanced MHRC (DeMRC) as a method aimed at low-dataset cases. DeMRC dynamically enhances the reading comprehension process,
 adapting to different datasets like the Chinese CAIL 2020 and HotpotQA. Xu et al. (2020) generally highlighting the importance of continuously inferring
 clue entities and candidate answers based on the question and clue paragraphs when using dynamic GNNs for MHRC \cite{RN173}. 
@@ -494,29 +503,32 @@ as they have biases and reasoning shortcuts \cite{RN177}.
 %TODO
 Recent surveys in the field of Multi-hop QA have significantly advanced our understanding of the complexity and variety of tasks requiring multi-hop reasoning. 
 They provide comprehensive overviews of MHQA, from its conceptual definition to the wide range of models and datasets developed to tackle its challenges. 
-While previous surveys have separately explored aspects of GNNs or multi-hop RC, our work synergizes these domains, providing a holistic view of how GNNs can enhance multi-hop reasoning in MRC.
-Our survey bridges a gap in the current literature by focusing on the synergistic relationship between GNNs and multi-hop reading comprehension. 
-Unlike existing surveys that either cover a wide range of applications or focus on multi-hop QA in a broader sense, our work provides a focused 
-exploration of GNNs' specific role and potential in multi-hop MRC. We critically analyze their capabilities and limitations in this context, 
-offering a unique perspective on this specialized area of NLP research. 
+While previous surveys have separately explored aspects of GNNs or multi-hop RC, our work synergizes these domains, providing a holistic view 
+of how GNNs can enhance multi-hop reasoning in MRC.Our survey bridges a gap in the current literature by focusing on the synergistic relationship 
+between GNNs and multi-hop reading comprehension. Unlike existing surveys that either cover a wide range of applications or focus on multi-hop QA 
+in a broader sense, our work provides a focused exploration of GNNs' specific role and potential in multi-hop MRC. We critically analyze their
+capabilities and limitations in this context, offering a unique perspective on this specialized area of NLP research. 
 
 \subsection{Surveys on Multi-hop QA and GNNs in NLP}
-Existing surveys, such as those by Mavi et al., Wu et al., and Mohammadi et al., provide extensive coverage on multi-hop QA and the applications of GNNs in NLP. Mavi et al.'s survey provides a 
-broad overview of Multi-Hop QA (MHQA), defining the abstract notion of 'multiple hops' and categorizing a wide range of tasks requiring multi-hop reasoning \cite{RN165}. It emphasizes the recent 
-surge in high-quality MHQA datasets and models. Mohammadi et al. focus on recent advancements in multi-hop MRC, reviewing 31 models with a strong emphasis on their multi-hop aspects \cite{RN80}. 
-While they offer an extensive comparison of models, our work dives into the specific role of GNNs in these models, exploring how they enhance the complex reasoning required in multi-hop MRC.
+Existing surveys, such as those by Mavi et al., Wu et al., and Mohammadi et al., provide extensive coverage on multi-hop QA and the applications 
+of GNNs in NLP. Mavi et al.'s survey provides a broad overview of Multi-Hop QA (MHQA), defining the abstract notion of 'multiple hops' and categorizing 
+a wide range of tasks requiring multi-hop reasoning \cite{RN165}. It emphasizes the recent surge in high-quality MHQA datasets and models. 
+Mohammadi et al. focus on recent advancements in multi-hop MRC, reviewing 31 models with a strong emphasis on their multi-hop aspects \cite{RN80}. 
+While they offer an extensive comparison of models, our work dives into the specific role of GNNs in these models, exploring how they enhance 
+the complex reasoning required in multi-hop MRC.
 
 \subsection{GNN-focused NLP Research}
 
 Wu et al. present a broad survey on GNNs in NLP, proposing a new taxonomy for GNN research and discussing a variety of NLP applications utilizing GNNs. 
-They provide an extensive summary of GNN applications, datasets, and evaluation metrics \cite{RN23}. Another survey by Wu et al. covers an even broader range of GNN applications 
-across different machine learning tasks, presenting a taxonomy to divide the state-of-the-art graph neural networks into four categories \cite{RN16}. Our work builds up on these studies while 
-providing a more specialized exploration of GNNs within the context of multi-hop MRC 
+They provide an extensive summary of GNN applications, datasets, and evaluation metrics \cite{RN23}. Another survey by Wu et al. covers an 
+even broader range of GNN applications across different machine learning tasks, presenting a taxonomy to divide the state-of-the-art graph 
+neural networks into four categories \cite{RN16}. Our work builds up on these studies while providing a more specialized exploration of GNNs 
+within the context of multi-hop MRC. 
 
 \subsection{Critical Perspectives on GNNs in QA}
-A study by Shao et al. provides a critical analysis of the necessity of graph structures in multi-hop QA. By constructing a strong baseline model, they argue that with the proper 
-use of pre-trained models, graph structures may not be crucial for multi-hop QA \cite{RN127}. Our survey acknowledges these critical perspectives but focuses on specific scenarios and tasks 
-within multi-hop MRC where GNNs offer distinct advantages.
+A study by Shao et al. provides a critical analysis of the necessity of graph structures in multi-hop QA. By constructing a strong baseline model, 
+they argue that with the proper use of pre-trained models, graph structures may not be crucial for multi-hop QA \cite{RN127}. Our survey 
+acknowledges these critical perspectives but focuses on specific scenarios and tasks within multi-hop MRC where GNNs offer distinct advantages.
 
 
 \section{Conclusion}
@@ -526,17 +538,17 @@ also addressed various complex scenarios where answers require reasoning over mu
 Throughout this survey, we have examined the key methodologies, innovations, challenges, and future directions that shape this dynamic research domain.
 
 Key achievements as of now include the fact that GNNs have improved the accuracy of multi-hop reasoning by effectively capturing 
-relationships between different entities and their attributes in texts. Notably the architectural strengths of GNNs in handling sequential data in texts
-are essential in this domain \cite{RN23}. 
+relationships between different entities and their attributes in texts. Notably the architectural strengths of GNNs in handling sequential 
+data in texts are essential in this domain \cite{RN23}. 
 
 \subsection{Challenges and Limitations}
 Despite significant progress, several challenges and limitations persist in the field of multiple-hop reading comprehension with GNNs.
 Firstly, high-quality, diverse datasets for training are limited since existing datasets often come with limitations in terms of scale, 
 diversity, and quality \cite{RN214}. The creation of datasets like HotpotQA has been instrumental, but the diversity and complexity of real-world 
-scenarios are still underrepresented. Secondly, current models struggle with generalizing to unseen data or different types of questions, as pointed out by
-Tang et al. (2020) \cite{RN215}. Thirdly, GNNs, particularly in multi-hop settings, require significant computational resources, 
-which can be a bottleneck for large-scale applications and hence, scalability in general \cite{RN216}. Additionally, understanding how GNN-based models 
-make decisions in multi-hop comprehension remains challenging.
+scenarios are still underrepresented. Secondly, current models struggle with generalizing to unseen data or different types of questions, as 
+pointed out by Tang et al. (2020) \cite{RN215}. Thirdly, GNNs, particularly in multi-hop settings, require significant computational resources, 
+which can be a bottleneck for large-scale applications and hence, scalability in general \cite{RN216}. Additionally, understanding how GNN-based 
+models make decisions in multi-hop comprehension remains challenging.
 
 \subsection{Future Directions}
 As mentioned above, the lack of diverse and complex datasets hinders the development of more robust models. Therefore, future research should 
