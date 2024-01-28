@@ -82,55 +82,117 @@
   
 \end{frame}
 
-\section{Background}
+\section{Theoretical Background}
 
-\begin{frame}{Metropolis titleformats}
-	\themename supports 4 different titleformats:
-	\begin{itemize}
-		\item Regular
-		\item \textsc{Smallcaps}
-		\item \textsc{allsmallcaps}
-		\item ALLCAPS
-	\end{itemize}
-	They can either be set at once for every title type or individually.
+\subsection{Machine Reading Comprehension (MRC)}
+
+\begin{frame}{Machine Reading Comprehension (MRC)}
+  \begin{itemize}
+    \item MRC: A key NLP task where machines answer questions using text passages.
+    \item Requires advanced NLP techniques: semantic analysis, context understanding, language modeling.
+    \item Challenges: Deep text understanding, context inference, mimicking human comprehension.
+  \end{itemize}
 \end{frame}
 
-\subsection{Approaches}
+\subsection{Multi-hop Reading Comprehension}
 
-{
-    \metroset{titleformat frame=smallcaps}
-\begin{frame}{Small caps}
-	This frame uses the \texttt{smallcaps} titleformat.
-
-	\begin{alertblock}{Potential Problems}
-		Be aware, that not every font supports small caps. If for example you typeset your presentation with pdfTeX and the Computer Modern Sans Serif font, every text in smallcaps will be typeset with the Computer Modern Serif font instead.
-	\end{alertblock}
+\begin{frame}{Multi-hop Reading Comprehension}
+  \begin{itemize}
+    \item Multi-hop RC: Involves complex questions requiring reasoning over multiple texts.
+    \item Key skill: Connecting disparate pieces of information to answer questions.
+    \item Applications: Document summarization, complex query answering.
+  \end{itemize}
 \end{frame}
-}
 
-{
-\metroset{titleformat frame=allsmallcaps}
-\begin{frame}{All small caps}
-	This frame uses the \texttt{allsmallcaps} titleformat.
+\subsection{Graph Neural Networks in MHRC}
 
-	\begin{alertblock}{Potential problems}
-		As this titleformat also uses smallcaps you face the same problems as with the \texttt{smallcaps} titleformat. Additionally this format can cause some other problems. Please refer to the documentation if you consider using it.
-
-		As a rule of thumb: Just use it for plaintext-only titles.
-	\end{alertblock}
+\begin{frame}{Graph Neural Networks in MHRC}
+  \begin{itemize}
+    \item GNNs: Handle graph-structured data, capturing complex relationships.
+    \item Key features: Node representation, neighborhood aggregation, iterative learning.
+    \item GNN Variants: GCNs (Kipf and Welling, 2016) and GATs (Veličković et al., 2018).
+    \item Application in MHRC: Effective in multi-hop reasoning, information aggregation.
+  \end{itemize}
 \end{frame}
-}
 
-{
-\metroset{titleformat frame=allcaps}
-\begin{frame}{All caps}
-	This frame uses the \texttt{allcaps} titleformat.
+\subsection{Importance of Datasets}
 
-	\begin{alertblock}{Potential Problems}
-		This titleformat is not as problematic as the \texttt{allsmallcaps} format, but basically suffers from the same deficiencies. So please have a look at the documentation if you want to use it.
-	\end{alertblock}
+\begin{frame}{Datasets in MHRC}
+  \begin{itemize}
+    \item Critical role in benchmarking performance and challenging reasoning capabilities.
+    \item Example Datasets:
+  \end{itemize}
+
+  \begin{figure}[t] % 'h' for "here", can be replaced with other placement specifiers
+    \centering
+    \includegraphics[width=\linewidth]{fig/ext_fig/sample_datasets.png} % Adjust 'width' as needed
+    \caption{Sample datasets}
+    \label{fig:sample_datasets} % For referencing the figure in the text
+  \end{figure}
+
 \end{frame}
-}
+
+
+\section{Taxonomy}
+
+\begin{frame}[fragile]{Graph Representation}
+  \begin{itemize}
+    \item Li et al. (2021) \cite{RN131} introduced an Asynchronous Multi-grained Graph Network (AMGN) that represents entities and sentences as nodes, using an asynchronous update mechanism to mimic human multi-hop reading logic.
+    \item Tu et al. (2019) \cite{RN124} proposed a Heterogeneous Document-Entity (HDE) graph, where entities are represented as nodes and relationships as edges, and used GNNs for reasoning over this graph.
+    \item Zhang et al. (2020) \cite{RN170} presented a context based Entity Graph Convolutional Network (CEG) that also represents entities as nodes, using various granularity levels of encodings and surrounding context 
+to enrich entity encoding.
+    \item Gao et al. (2023) \cite{RN136} introduced ClueReader, a heterogeneous graph attention network that represents entities as nodes and relationships as edges, and uses an attention mechanism to assemble semantic features in multi-angle representations.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Graph Construction}
+  \begin{itemize}
+    \item Graph neural networks can be considered either static or dynamic.
+    \item Discussions in the field of GNNs primarily involve dynamic GNNs.
+    \item One approach called Keywords-aware Dynamic Graph Neural Network (KA-DGN) suggested by Jia et al. (2022) \cite{RN171b} emphasizes salient information in the text, extracting keywords from the question and context to improve MHRC performance.
+    \item The dynamic structure, in this case, allows for more adaptive and responsive handling of complex questions and multiple paragraphs.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Message Passing}
+  \begin{itemize}
+    \item Graph Message passing enables the integration and reasoning of information scattered across multiple documents.
+    \item Aggregation techniques focus on nodes gathering information from adjacent nodes.
+    \item Combination practices involve nodes updating their states by combining their own features with the aggregated information.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{GNN Architectures}
+  \begin{itemize}
+    \item ConvGNNs utilize a convolutional process on graphs where the focus is on aggregating information from a node's immediate neighbors.
+    \item Graph processing can also be done in a recurrent manner, allowing for the capture of information from wider graph neighborhoods over iterations, as displayed by the Recurrent Graph Neural Networks (RGNNs) architecture.
+    \item Attention-based Graph Neural Networks are a popular architecture concept for selective focus on important nodes and edges in order to emphasize key information.
+    \item Recent advancements include hybrid models that combine different GNN architectures or integrate GNNs with other neural network types for enhanced performance.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Dataset and Task Type}
+  \begin{itemize}
+    \item The ability of GNNs to handle different types of questions and datasets makes them particularly versatile for MHRC tasks.
+    \item Specifically for factoid question answering, GNNs are used to connect disparate pieces of information from various texts to answer these questions \cite{RN116}.
+    \item Complex reasoning tasks require synthesizing information from various sources to answer questions that involve inference, deduction, or contradiction.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Evaluation and Performance Metrics}
+  \begin{itemize}
+    \item Evaluation of models on the HotpotQA dataset demonstrate accuracy metrics such as F1 score and Exact Match \cite{RN116}.
+    \item Interpretability metrics assess how well the model's decision-making process can be understood which is crucial for reliability reasons.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Application Domains}
+  \begin{itemize}
+    \item The flexibility of GNNs in handling different types of data makes them suitable for both domain-specific and general-purpose MHRC.
+    \item An example for domain-specific application includes the use of GNNs in biomedical literature for MHRC tasks \cite{RN129}.
+    \item A study on the use of GNNs in the HotpotQA dataset, a general-purpose MHRC benchmark, illustrates their effectiveness also in broader applications \cite{RN116}.
+  \end{itemize}
+\end{frame}
 
 \section{Core Concepts}
 
@@ -417,7 +479,43 @@
 %   Some references to showcase [allowframebreaks] \cite{RN2}
 % \end{frame}
 
-\section{Conclusion and Future Directions}
+\section{Future Directions and Conclusion}
+
+\begin{frame}{Future Research Directions}
+  \begin{itemize}
+    \item \textbf{Dataset Development:}
+      \begin{itemize}
+        \item Future datasets should mirror real-world complexity.
+        \item Focus on diversity in scenarios, question types, and complexity.
+      \end{itemize}
+    \item \textbf{Model Efficiency and Generalization:}
+      \begin{itemize}
+        \item Address computational resource requirements of GNNs.
+        \item Promote cross-domain generalization and adaptability.
+        \item Explore Hybrid Models combining various GNN architectures.
+      \end{itemize}
+    \item \textbf{Ethical and Explainable AI:}
+      \begin{itemize}
+        \item Emphasize transparent decision-making processes.
+        \item Address ethical concerns in model deployment.
+        \item Focus on making MHRC models more interpretable.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{Conclusion}
+
+\begin{frame}{Conclusion}
+  \begin{itemize}
+    \item GNNs have significantly advanced MHRC by modeling complex textual relationships.
+    \item Challenges remain in dataset quality, model scalability, and explainability.
+    \item Future research should focus on creating diverse datasets, enhancing model efficiency, and ensuring ethical AI practices.
+    \item The synergy between cognitive science and GNNs could pave the way for more intuitive and effective MHRC models.
+  \end{itemize}
+\end{frame}
+
+
+
 
 % \begin{frame}{Summary}
 
