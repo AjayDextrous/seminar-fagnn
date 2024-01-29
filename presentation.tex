@@ -196,11 +196,11 @@ to enrich entity encoding.
 
 \begin{frame}
   \frametitle{Hierarchical Graph Network}
-
   \begin{itemize}
-    \item A hierarchical graph network with nodes for different granularity levels, like questions, paragraphs, sentences, and entities. \pause
-    \item Large-scale pre-trained language models like BERT or RoBERTa are used to encode the input text. \pause
-    \item Encoded representations are then used to construct the hierarchical graph. \pause
+    % \pause
+    \item A hierarchical graph network with nodes for different granularity levels, like questions, paragraphs, sentences, and entities. %\pause
+    \item Large-scale pre-trained language models like BERT or RoBERTa are used to encode the input text. %\pause
+    \item Encoded representations are then used to construct the hierarchical graph. %\pause
     \item Multi-task prediction module performs multiple roles like paragraph selection, supporting fact selection, entity prediction and answer span extraction.
   \end{itemize}
 
@@ -234,8 +234,8 @@ to enrich entity encoding.
   \end{column}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \pause
-        \item Coarse-to-fine, step-wise method for evidence paragraph retrieval. \pause
+        % \pause
+        \item Coarse-to-fine, step-wise method for evidence paragraph retrieval. %\pause
         \item Incorporates two novel attention mechanisms for sentence extraction and answer span extraction.
       \end{itemize}
     \end{column}
@@ -260,8 +260,8 @@ to enrich entity encoding.
 \begin{frame}
   \frametitle{Arguments against Graph-based approaches}
   \begin{itemize}
-    \item \textbf{Shao et al. (2020)} \cite{RN127} argue that with the proper use of pre-trained models, graph structure may not be necessary. \pause
-    \item They also point out that adjacency matrix and graph structure can be regarded as task-related prior knowledge. \pause
+    \item \textbf{Shao et al. (2020)} \cite{RN127} argue that with the proper use of pre-trained models, graph structure may not be necessary. %\pause
+    \item They also point out that adjacency matrix and graph structure can be regarded as task-related prior knowledge. %\pause
     \item \textbf{Groeneveld et al. (2020)} \cite{RN126} showed that a simple BERT based model can outperform a Graph-based model on the HotpotQA dataset.
   \end{itemize}
 
@@ -270,7 +270,7 @@ to enrich entity encoding.
 \begin{frame}
   \frametitle{Arguments against Graph-based approaches}
   \begin{itemize}
-    \item \textbf{Wu et al. (2021)} \cite{RN106} highlights limitations of graph modeling for MHRC, which requires NER and also rigid rule-based graph construction. \pause
+    \item \textbf{Wu et al. (2021)} \cite{RN106} highlights limitations of graph modeling for MHRC, which requires NER and also rigid rule-based graph construction. %\pause
     \item They also point out that the retrieval stage might be more important than the reasoning stage.
   \end{itemize}
 
@@ -281,9 +281,9 @@ to enrich entity encoding.
 \begin{frame}
   \frametitle{Dataset Limitations}
   \begin{itemize}
-    \item \textbf{Min et al. (2019)} \cite{RN150} argue that constructing large multihop datasets is difficult, and that the current datasets like HotpotQA can be solved with single-hop approaches. \pause
-    \item They noted that humans could solve over 80\% of HotpotQA questions with one gold paragraph withheld. \pause
-    \item \textbf{Groenveld et al. (2020)} \cite{RN126} indicate that HotpotQA might not be suitable to demonstrate the value of more complex retrieval techniques, and that supporting sentence identification in HotpotQA might not be a multi-hop problem at all. \pause
+    \item \textbf{Min et al. (2019)} \cite{RN150} argue that constructing large multihop datasets is difficult, and that the current datasets like HotpotQA can be solved with single-hop approaches. %\pause
+    \item They noted that humans could solve over 80\% of HotpotQA questions with one gold paragraph withheld.% \pause
+    \item \textbf{Groenveld et al. (2020)} \cite{RN126} indicate that HotpotQA might not be suitable to demonstrate the value of more complex retrieval techniques, and that supporting sentence identification in HotpotQA might not be a multi-hop problem at all.% \pause
     \item Several studies \cite{RN154} \cite{RN176} \cite{RN150} \cite{RN175} indicate that many questions in HotpotQA can be answered using heuristics, 
     as they have biases and reasoning shortcuts \cite{RN177}.
   \end{itemize}
