@@ -29,7 +29,7 @@
 
 \begin{frame}{Table of contents}
   \setbeamertemplate{section in toc}[sections numbered]
-  \tableofcontents%[hideallsubsections]
+  \tableofcontents[hideallsubsections]
 \end{frame}
 
 \section[Intro]{Introduction}
@@ -74,14 +74,14 @@
 \end{frame}
 
 
-\begin{frame}[fragile]{Sections}
-  Sections group slides of the same topic
+% \begin{frame}[fragile]{Sections}
+%   Sections group slides of the same topic
 
-  \begin{verbatim}    \section{Elements}\end{verbatim}
+%   \begin{verbatim}    \section{Elements}\end{verbatim}
 
-  for which \themename provides a nice progress indicator \ldots
+%   for which \themename provides a nice progress indicator \ldots
   
-\end{frame}
+% \end{frame}
 
 \section{Theoretical Background}
 
@@ -197,6 +197,18 @@ to enrich entity encoding.
 \begin{frame}
   \frametitle{Hierarchical Graph Network}
 
+  \begin{itemize}
+    \item A hierarchical graph network with nodes for different granularity levels, like questions, paragraphs, sentences, and entities.
+    \item Large-scale pre-trained language models like BERT or RoBERTa are used to encode the input text.
+    \item Encoded representations are then used to construct the hierarchical graph.
+    \item Multi-task prediction module performs multiple roles like paragraph selection, supporting fact selection, entity prediction and answer span extraction.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hierarchical Graph Network}
+
   \begin{figure}[t] % 'h' for "here", can be replaced with other placement specifiers
     \centering
     \includegraphics[width=\linewidth]{fig/ext_fig/hgn_diagram.png} % Adjust 'width' as needed
@@ -207,6 +219,16 @@ to enrich entity encoding.
 \end{frame}
 
 \subsection{Non-Graph based approach: S2G}
+
+\begin{frame}
+  \frametitle{Select-to-Guide Strategy}
+
+  \begin{itemize}
+    \item Coarse-to-fine, step-wise paragraph selecting method.
+    \item Incorporates two novel attention mechanisms.
+  \end{itemize}
+
+\end{frame}
 
 \begin{frame}
   \frametitle{Select-to-Guide Strategy}
@@ -248,7 +270,7 @@ to enrich entity encoding.
   \begin{itemize}
     \item \textbf{Min et al. (2019)} \cite{RN150} argue that constructing large multihop datasets is difficult, and that the current datasets like HotpotQA can be solved with single-hop approaches.
     \item They noted that humans could solve over 80\% of HotpotQA questions with one gold paragraph withheld.
-    \item \textbf{Groenveld et al. (2020)} indicate that HotpotQA might not be suitable to demonstrate the value of more complex retrieval techniques, and that supporting sentence identification in HotpotQA might not be a multi-hop problem at all.
+    \item \textbf{Groenveld et al. (2020)} \cite{RN126} indicate that HotpotQA might not be suitable to demonstrate the value of more complex retrieval techniques, and that supporting sentence identification in HotpotQA might not be a multi-hop problem at all.
   \end{itemize}
   
 \end{frame}
@@ -488,19 +510,19 @@ to enrich entity encoding.
 
 
 
-\begin{frame}{Summary}
+% \begin{frame}{Summary}
 
-  Get the source of this theme and the demo presentation from
+%   Get the source of this theme and the demo presentation from
 
-  \begin{center}\url{github.com/matze/mtheme}\end{center}
+%   \begin{center}\url{github.com/matze/mtheme}\end{center}
 
-  The theme \emph{itself} is licensed under a
-  \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons
-  Attribution-ShareAlike 4.0 International License}.
+%   The theme \emph{itself} is licensed under a
+%   \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons
+%   Attribution-ShareAlike 4.0 International License}.
 
-  \begin{center}\ccbysa\end{center}
+%   \begin{center}\ccbysa\end{center}
 
-\end{frame}
+% \end{frame}
 
 {\setbeamercolor{palette primary}{fg=black, bg=yellow}
 \begin{frame}[standout]
@@ -510,16 +532,16 @@ to enrich entity encoding.
 
 \appendix
 
-\begin{frame}[fragile]{Backup slides}
-  Sometimes, it is useful to add slides at the end of your presentation to
-  refer to during audience questions.
+% \begin{frame}[fragile]{Backup slides}
+%   Sometimes, it is useful to add slides at the end of your presentation to
+%   refer to during audience questions.
 
-  The best way to do this is to include the \verb|appendixnumberbeamer|
-  package in your preamble and call \verb|\appendix| before your backup slides.
+%   The best way to do this is to include the \verb|appendixnumberbeamer|
+%   package in your preamble and call \verb|\appendix| before your backup slides.
 
-  \themename will automatically turn off slide numbering and progress bars for
-  slides in the appendix.
-\end{frame}
+%   \themename will automatically turn off slide numbering and progress bars for
+%   slides in the appendix.
+% \end{frame}
 
 \begin{frame}[allowframebreaks]{References}
 
