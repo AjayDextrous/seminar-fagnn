@@ -68,6 +68,7 @@
   \begin{itemize}
     \item The task is usually split into two parts: finding the relevant parts of the passage and then using those parts to answer the question.
     \item The task is usually evaluated using the F1 score, which is the harmonic mean of precision and recall.
+    \item Applications: Document summarization, complex query answering
     
   \end{itemize}
 \end{frame}
@@ -84,36 +85,31 @@
 
 \section{Theoretical Background}
 
-\subsection{Machine Reading Comprehension (MRC)}
-
-\begin{frame}{Machine Reading Comprehension (MRC)}
-  \begin{itemize}
-    \item MRC: A key NLP task where machines answer questions using text passages.
-    \item Requires advanced NLP techniques: semantic analysis, context understanding, language modeling.
-    \item Challenges: Deep text understanding, context inference, mimicking human comprehension.
-  \end{itemize}
-\end{frame}
-
-\subsection{Multi-hop Reading Comprehension}
-
-\begin{frame}{Multi-hop Reading Comprehension}
-  \begin{itemize}
-    \item Multi-hop RC: Involves complex questions requiring reasoning over multiple texts.
-    \item Key skill: Connecting disparate pieces of information to answer questions.
-    \item Applications: Document summarization, complex query answering.
-  \end{itemize}
-\end{frame}
-
 \subsection{Graph Neural Networks in MHRC}
 
-\begin{frame}{Graph Neural Networks in MHRC}
+\begin{frame}{Introduction to Graph Neural Networks in MHRC}
   \begin{itemize}
-    \item GNNs: Handle graph-structured data, capturing complex relationships.
-    \item Key features: Node representation, neighborhood aggregation, iterative learning.
-    \item GNN Variants: GCNs (Kipf and Welling, 2016) and GATs (Veličković et al., 2018).
-    \item Application in MHRC: Effective in multi-hop reasoning, information aggregation.
+    \item GNNs adapt traditional neural network models to handle graph-structured data. [Scarselli et al., 2008] \cite{RN203}
+    \item They capture complex relationships and interdependencies within data, making them ideal for MHRC tasks.
+    \item Key features include node representation, where each node corresponds to an entity or a concept in the text.
+    \item Neighborhood aggregation allows GNNs to gather and process information from connected nodes, essential for understanding context in MHRC.
+    \item Iterative learning through these features enables GNNs to effectively model and reason over complex information networks. [Zhou et al., 2020] \cite{RN1}
   \end{itemize}
 \end{frame}
+
+
+\begin{frame}{GNN Variants and Their Application in MHRC}
+  \begin{itemize}
+    \item Graph Convolutional Networks (GCNs): Introduced by Kipf and Welling (2016), they generalize convolutional neural networks to graph data, making them adept at feature extraction for MHRC \cite{RN209}
+    \item Graph Attention Networks (GATs): Proposed by Veličković et al. (2018), these networks use attention mechanisms to focus on important nodes, enhancing reasoning over graphs \cite{RN7}
+    \item Application in MHRC: 
+      \begin{itemize}
+        \item GNNs, particularly GCNs and GATs, are effective in multi-hop reasoning tasks where information is scattered across different documents [De Cao et al., 2019] \cite{RN117}
+        \item They excel at aggregating information from various sources, providing a structured way to approach complex questions in MHRC datasets [Yao et al., 2019]
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
 
 \subsection{Importance of Datasets}
 
@@ -497,13 +493,10 @@ to enrich entity encoding.
     \item \textbf{Ethical and Explainable AI:}
       \begin{itemize}
         \item Emphasize transparent decision-making processes.
-        \item Address ethical concerns in model deployment.
         \item Focus on making MHRC models more interpretable.
       \end{itemize}
   \end{itemize}
 \end{frame}
-
-\subsection{Conclusion}
 
 \begin{frame}{Conclusion}
   \begin{itemize}
