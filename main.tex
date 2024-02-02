@@ -158,10 +158,10 @@ The basic goal of MRC is to develop systems that can read and comprehend unstruc
 Recently, there has been a lot of interest in the task of multi-hop reading comprehension (MHRC), where the answer to a question is not 
 directly stated in a single passage, but can be inferred by combining information from multiple documents. To this end, a number of datasets 
 have been proposed, such as HotpotQA \cite{RN116}, QAngaroo \cite{RN115}, and MuSiQue \cite{RN167}. Some datasets also include supporting 
-facts, whose extraction could be seen as providing explainability for MHRC tasks  \cite{RN116} \cite{RN106}.
+facts, whose extraction could be seen as providing explainability for MHRC tasks  \cite{RN116, RN106}.
 
 To solve the task of MHRC, a number of approaches have been proposed, which can be broadly classified into two categories:
-Graph-based approaches \cite{RN81} \cite{RN117} \cite{RN118} \cite{RN122} \cite{RN119} \cite{RN91} and Non-graph-based approaches. Most of 
+Graph-based approaches \cite{RN81, RN117, RN118, RN122, RN119, RN91} and Non-graph-based approaches. Most of 
 the methods can be basically decomposed into a Retrieval phase and a Reading phase \cite{RN166}. Graph-based approaches can be effective for 
 this task because they enable the modeling of complex relationships between entities \cite{RN23}, and provide the integration of global 
 evidence. They can also mimic human reasoning processes \cite{RN35}.
@@ -175,8 +175,8 @@ evidence. They can also mimic human reasoning processes \cite{RN35}.
 
 %TODO: brief description of non-graph-based approaches
 
-The first step in Graph-based approaches is to construct either an entity graph \cite{RN81} \cite{RN117} \cite{RN122} \cite{RN141} \cite{RN91}
- \cite{RN130} or a hierarchical graph \cite{RN124} \cite{RN119} \cite{RN130}, to model the relationships in the texts. Once this is done, a 
+The first step in Graph-based approaches is to construct either an entity graph \cite{RN81, RN117, RN122, RN141, RN91, RN130} or a hierarchical 
+graph \cite{RN124, RN119, RN130}, to model the relationships in the texts. Once this is done, a 
 GNN-based reasoning module is used to perform multi-hop reasoning over the graph, and finally a prediction module is used to predict answers 
 \cite{RN23}.
 %TODO: expand this paragraph
@@ -209,9 +209,9 @@ but also to comprehend and infer meaning in a way comparable to human understand
 Multi-hop question answering (QA) is a challenging aspect of MRC that requires multi-step reasoning over multiple passages to find the answer 
 and supporting evidence \cite{RN165}. It is a crucial component of natural language processing (NLP) and AI systems, with a wide range of applications, 
 as it requires models to connect multiple pieces of evidence to answer complex questions. Therefore, it can be used for tasks such as document 
-and timeline summarization \cite{RN202} \cite{RN201}. To improve the performance of multi-hop QA models, different model architectures such 
-as hybrid models or TransferNet, which supports both label and text relations in a unified framework \cite{RN164} \cite{RN133}. 
-The development of better models was further encouraged through the availability of high quality data sets \cite{RN116} \cite{RN115}
+and timeline summarization \cite{RN202, RN201}. To improve the performance of multi-hop QA models, different model architectures such 
+as hybrid models or TransferNet, which supports both label and text relations in a unified framework \cite{RN164, RN133}. 
+The development of better models was further encouraged through the availability of high quality data sets \cite{RN116, RN115}
 Studies collectively highlight the importance of multi-hop QA in enhancing the reasoning and inference skills of NLP models across various domains. 
 A notable development in multi-hop QA is the application of Graph Neural Networks. The multi-hop attention mechanism in GNNs, for instance, 
 has improved information aggregation, making these models more effective and accurate in complex reasoning tasks \cite{RN109}. These advancements 
@@ -460,8 +460,7 @@ from the supporting documents using BERT.
 \subsection{Evaluating the effectiveness of Graph-based approaches}
 
 For a long while, Graph based approaches were seen as the SOTA for MHRC. However, recently, there have been arguments as to whether GNNs 
-are actually necessary for MHRC. The best performing models on the HotpotQA dataset \cite{RN116} are non-graph-based approaches \cite{RN105} 
-\cite{RN149}.
+are actually necessary for MHRC. The best performing models on the HotpotQA dataset \cite{RN116} are non-graph-based approaches \cite{RN105, RN149}.
 
 Min et al. (2019) \cite{RN150} argue that constructing large multi-hop datasets is difficult, and that the current datasets like HotpotQA can 
 be solved with single-hop approaches. They also suggest that more focus should be given to the retrieval stage, and that the reasoning stage, 
@@ -497,7 +496,7 @@ SOTA on HotpotQA.
 %TODO graph based models are still pretty good in the fullwiki setting - maybe that is a potential future direction?
 
 HotpotQA seems to be the de-facto dataset for evaluating MHRC models. However, there have been arguments that the dataset itself is flawed. 
-Several studies \cite{RN176} \cite{RN175} \cite{RN154} \cite{RN150} indicate that many questions in HotpotQA can be answered using heuristics, 
+Several studies \cite{RN176, RN175, RN154, RN150} indicate that many questions in HotpotQA can be answered using heuristics, 
 as they have biases and reasoning shortcuts \cite{RN177}.
 
 
