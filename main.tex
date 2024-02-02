@@ -34,7 +34,7 @@
 %%
 %%
 %% The first command in your LaTeX source must be the \documentclass command.
-\documentclass[sigplan,screen]{acmart}
+\documentclass[sigplan,screen,nonacm]{acmart}
 %% NOTE that a single column version is required for 
 %% submission and peer review. This can be done by changing
 %% the \doucmentclass[...]{acmart} in this template to 
@@ -231,7 +231,7 @@ A core principle of GNNs lies in their ability to learn representations for node
 such as neighborhood aggregation or message passing, nodes update their representations by adapting features from adjacent nodes \cite{RN207}. 
 This iterative process facilitates information flow across the network, enabling the GNN to capture complex relational patterns \cite{RN15}. 
 One of the most prominent variants of GNNs is the Graph Convolutional Network (GCN), introduced by Kipf and Welling (2016). GCNs generalize 
-the concept of convolution from grid-like data (e.g., images) to graphs, enabling efficient feature extraction from graph data \cite{RN209}. 
+the concept of convolution from grid-like data (e.g., images) to graphs, enabling efficient feature extraction from graph data \cite{RN2}. 
 Another notable variant is the Graph Attention Network (GAT), introduced by Veličković et al. (2018). GATs incorporate attention mechanisms 
 in the aggregation process, allowing for more nuanced weighting of neighbor contributions, which enhances the model's ability to focus on 
 important features in the graph \cite{RN7}.
@@ -321,7 +321,7 @@ The ability of GNNs to handle different types of questions and datasets makes th
 answering which involves questions that require factual, often concise, answers, GNNs are used to connect disparate pieces of information from various texts
 to answer these questions \cite{RN116}. In comparison to that, complex reasoning tasks require synthesizing information from various sources to answer 
 questions that involve inference, deduction, or contradiction. The QAngaroo dataset, specifically designed for multi-hop reasoning over knowledge graphs, 
-serves as an excellent example of a complex reasoning task \cite{RN212}. GNNs in this context help in navigating the knowledge graph to infer answers.
+serves as an excellent example of a complex reasoning task \cite{RN115}. GNNs in this context help in navigating the knowledge graph to infer answers.
 
 \subsection{Evaluation and Performance Metrics}
 Accurate and interpretable evaluation metrics are essential for assessing and improving the performance of GNNs in MHRC, guiding future advancements in the field.
@@ -408,7 +408,7 @@ $$
 
 \subsubsection{DFGN}
 Dynamically Fused Graph Network (DFGN) \cite{RN122} constructs a \emph{dynamic entity graph}, where a dynamic local entity graph is 
-constructed for each question. It is comprised of 5 modules for paragraph selection, entity graph construction, encoding, fusion 
+constructed for each question. It is comprised of five modules for paragraph selection, entity graph construction, encoding, fusion 
 (for multi-hop reasoning), and a final prediction layer.
 
 The paragraph selection module for DFGN also uses a pretrained BERT-based model \cite{RN153} to select the most relevant paragraphs to the 
@@ -417,8 +417,8 @@ corenlp toolkit \cite{RN170} is used to extract entities from the context. Edges
 and paragraph-level links. The query and context are concatenated and passed through a BERT-based model, and further through a bi-attention 
 layer to obtain the contextualized representations.
 
-The fusion block has 3 major steps: 1. Doc2Graph, where the text spans are converted into entity embeddings, 2. Information propagation on 
-the entity graph and 3. Graph2Doc, where information passes from the entity back to the tokens. In the 2nd step, we utilize a GNN based on 
+The fusion block has three major steps: 1. Doc2Graph, where the text spans are converted into entity embeddings, 2. Information propagation on 
+the entity graph and 3. Graph2Doc, where information passes from the entity back to the tokens. In the second step, we utilize a GNN based on 
 Graph Attention Networks \cite{RN7} to propagate node information. The prediction layer is similar to \cite{RN116}
 
 \subsubsection{HGN}
@@ -434,7 +434,7 @@ models.
 \subsubsection{AMGN}
 Asynchronous Multi-grained Graph Network \cite{RN131} or AMGN and it's variant AMGN+ is currently the best performing graph-based approach on the HotpotQA dataset.
 The authors point out several limitations of existing GNN based approaches. Previous methods perform message-passing synchronously,
-which prevents reasoning in a fine-grained logical order. Secondly, previous methods only consider the  updated entity nodes
+which prevents reasoning in a fine-grained logical order. Secondly, previous methods only consider the  updated entity nodes.
 %TODO describe previous limitations
 They propose AMGN which uses an asynchronous message-passing mechanism on multi-grained nodes, which mimics the the logical order of multi-hop 
 reasoning. RoBERTa \cite{RN171} is used to encode the question and the context. A heterogeneous graph is constructed with nodes for sentences 
@@ -462,12 +462,12 @@ are actually necessary for MHRC. The best performing models on the HotpotQA data
 
 Min et al. (2019) \cite{RN150} argue that constructing large multi-hop datasets is difficult, and that the current datasets like HotpotQA can 
 be solved with single-hop approaches. They also suggest that more focus should be given to the retrieval stage, and that the reasoning stage, 
-atleast for current datasets might not be a multi-hop problem. They noted that humans could solve over 80\% of HotpotQA questions with one 
+at least for current datasets might not be a multi-hop problem. They noted that humans could solve over 80\% of HotpotQA questions with one 
 gold paragraph withheld. This indicates that current datasets may not be suitable for evaluating the effectiveness of graph-based approaches.
 
 Shao et al. (2020) \cite{RN127} argue that a graph structure may not be necessary with proper use of pre-trained models, and that the graph 
 structure can be regarded as task-specific prior knowledge. For their approach, they reimplement DFGN \cite{RN122} as their baseline to perform 
-their evaluations. They use RoBERTa \cite{RN171} to retrieve paragraphs, and to encode query and context A fine-tuned pre-trained BERT Model 
+their evaluations. They use RoBERTa \cite{RN171} to retrieve paragraphs, and to encode query and context. A fine-tuned pre-trained BERT Model 
 is used to extract entities from candidate paragraphs. They compare the results with the fusion block, and also by removing the fusion block 
 and directly feeding the outputs of the pre-trained layer directly to the prediction layer. They find that by using a fine-tuning approach, 
 models with and without graph fusion block can reach almost equal results. They also point out that Graph 
