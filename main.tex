@@ -342,10 +342,10 @@ illustrates their effectiveness also in broader applications \cite{RN116}.
 \section{Core Concepts}
 %TODO
 \subsection{An Overview of Current approaches}
-For the purposes of understanding Graph based approaches, we will consider the following models:
-DFGN \cite{RN122}, HGN \cite{RN119}, CogQA \cite{RN118}, Gated-RGCN \cite{RN91}, AMGN \cite{RN131} and DRN \cite{RN142}. We will also compare 
-them with a couple of leading non-graph-based approaches: Beam Retrieval \cite{RN105} (Current SOTA for HotpotQA Distractor Setting) and
-HopRetriever \cite{RN149}.
+For the purposes of understanding Graph-based approaches, we will consider the following models:
+DFGN \cite{RN122}, HGN \cite{RN119}, CogQA \cite{RN118}, Gated-RGCN \cite{RN91}, AMGN \cite{RN131} and DRN \cite{RN142}. We will also evaluate 
+a couple of leading non-graph-based approaches: Beam Retrieval \cite{RN105} (Current SOTA for HotpotQA Distractor Setting),
+HopRetriever \cite{RN149} and Select-to-Guide (S2G) \cite{RN106}.
 
 \begin{table*}[ht]
   \centering
@@ -373,7 +373,7 @@ HopRetriever \cite{RN149}.
   \hline
 \end{tabular}
 
-\label{fig:leaderboard_hotpotqa} % For referencing the figure in the text
+\label{table:leaderboard_hotpotqa} % For referencing the table in the text
 \end{table*}
 
 \subsubsection{CogQA}
@@ -409,6 +409,31 @@ $$
 answer = \underset{\text{answer node }x}{\mathrm{argmax}}  \mathcal{F}(\boldsymbol{X}[x])
 $$
 
+\subsubsection{Gated-RGCN}
+Gated Relational Graph Convolutional Network \cite{RN91} is a graph-based approach that uses a Gated RGCN to perform multi-hop reasoning.
+The model introduces a path-based reasoning mechanism, which contains multiple reasoning paths from question to candidate answers. The model is 
+trained on the WikiHop dataset \cite{RN115}.
+
+Firstly, an entity graph is constructed based on Entity-GCN \cite{RN117}. Additionally, reasoning entities are selected from the reasoning paths and added to the 
+graph. Different edge types are defined to encode the structural relationship between the entities. Each node in the graph is then encoded using
+GLoVe embeddings \cite{RN98} and ELMo embeddings \cite{RN183}.
+
+After the graph is initialized, the Gated-RGCN is used to perform multi-hop reasoning. They use a question aware gating mechanism to avoid irrelevant information
+during propagation. The final output layer is used to predict the correct output.
+
+\subsubsection{DRN}
+Dynamic Reasoning Network (DRN) \cite{RN142} is a graph-based approach that uses a dynamic reasoning graph to perform multi-hop reasoning.
+A query reshaping mechanism is used to mimic human reading habits. The model is trained on the HotpotQA \cite{RN116} and TriviaQA \cite{RN125} datasets.
+
+Firstly, a pre-trained BERT-based model \cite{RN153} is used to score passages based on their similarity to the question, and passages whose score
+is above a threshold are selected as gold passages. Then, the query and gold passages are concatenated and passed through a BERT-based model to obtain
+contexualized representations, and co-attention is used to improve the interactions between the query and the passages.
+
+Then, an Entity graph is constructed, with these rules: 1. Edges between nodes that have named entities or noun phrase from the same query.
+2. Edges between nodes that are in the same passage. 3. Edges between nodes that have at least one entities or noun phrase from the same sentence.
+A dynamic reasoning block reasons over the graph and updates the entity representations. A query reshaping mechanism is employed to dynamically 
+compose the important parts of the query at each reading phase. Finally a prediction layer is used to predict the answer.
+
 \subsubsection{DFGN}
 Dynamically Fused Graph Network (DFGN) \cite{RN122} constructs a \emph{dynamic entity graph}, where a dynamic local entity graph is 
 constructed for each question. It is comprised of five modules for paragraph selection, entity graph construction, encoding, fusion 
@@ -426,12 +451,19 @@ Graph Attention Networks \cite{RN7} to propagate node information. The predictio
 
 \subsubsection{HGN}
 Hierarchical Graph Network (HGN) \cite{RN119} proposes a hierarchical graph network with nodes for different granularity levels, like questions, 
-paragraphs, sentences, and entities. Large-scale pre-trained language models like BERT \cite{RN153} or RoBERTa \cite{RN171} are used to encode 
-the input text. The encoded representations are then used to construct the hierarchical graph. It uses a multi-task prediction module which 
-performs multiple roles like paragraph selection, supporting fact selection, entity prediction and answer span extraction. HGN uses an 
-implementation of the GAT \cite{RN7} as the GNN.
+paragraphs, sentences, and entities. It primarily consists of four main components: 1. A hierarchical graph construction module, 2. A context encoding module,
+3. A GAT based multi-hop reasoning module, and 4. A multi-task prediction module.
 
-However, the model uses hyperlinks provided in the Wiki-pedia articles rather than entity linking, so it is not entirely comparable to other 
+Firstly, paragraphs are retrieved using title matching. Additionally, a paragraph ranker based on a pre-trained RoBERTa encoder is used to select
+the two paragraphs with the highest scores. Second hop paragraphs are then discovered using Wikipedia hyperlinks. 
+
+Secondly, Large-scale pre-trained language models like BERT \cite{RN153} or RoBERTa \cite{RN171} are used to encode 
+the input text. The encoded representations are then used to construct the hierarchical graph. Subsequently, a GAT based multi-hop reasoning module
+performs reasoning over the graph and the node representations are updated.
+Finally, it uses a multi-task prediction module which performs multiple roles like paragraph selection, supporting fact selection, entity prediction 
+and answer span extraction. HGN uses an implementation of the GAT \cite{RN7} as the GNN.
+
+However, since the model uses hyperlinks provided in the Wikipedia articles rather than entity linking, it is not entirely comparable to other 
 models.
 
 \subsubsection{AMGN}
@@ -456,11 +488,24 @@ from the supporting documents using BERT.
  A Supervised Reader or a zero-shot LLM is used for the reading module. It achieves strong performance and has achieved SOTA on the 
  HotpotQA dataset \cite{RN116}.
 
+\subsubsection{Select-to-Guide (S2G)}
+The Select-to-Guide (S2G) model \cite{RN106} is a non-graph-based approach that models the multi-hop reasoning nature in the retrieval module.
+It uses a Coarse-to-fine step-wise method for evidence paragraph retrieval, and uses two novel attention mechanisms for sentence and answer 
+span extraction.
+
+Firstly, The evidence paragraphs are retrieved using a multi-headed self-attention layer, using a score matching objective. Then, a score refinement
+module which uses token-level bi-attention is used to refine the scores, and then a final fine-grained prediction layer is used to select two golden paragraphs.
+
+Then, the evidence sentences are extracted using a novel Sentence-aware Self-Attention mechanism, followed by a "Sentence Transformer" module. Using the 
+extracted evidence sentences, the answer span is then extracted using a novel "Evidence Guided Attention" mechanism. Similar to the evidence extraction,
+another set of self-attention layers are used to refine the answer span.
+
 
 \subsection{Evaluating the effectiveness of Graph-based approaches}
 
-For a long while, Graph based approaches were seen as the SOTA for MHRC. However, recently, there have been arguments as to whether GNNs 
-are actually necessary for MHRC. The best performing models on the HotpotQA dataset \cite{RN116} are non-graph-based approaches \cite{RN105, RN149}.
+For a long while, Graph-based approaches were seen as the SOTA for MHRC. However, recently, there have been arguments as to whether GNNs 
+are actually necessary for MHRC. Looking at Table \ref{table:leaderboard_hotpotqa} on page \pageref{table:leaderboard_hotpotqa}, we can see 
+that the best performing models on the HotpotQA dataset \cite{RN116} are non-graph-based approaches \cite{RN105, RN149}.
 
 Min et al. (2019) \cite{RN150} argue that constructing large multi-hop datasets is difficult, and that the current datasets like HotpotQA can 
 be solved with single-hop approaches. They also suggest that more focus should be given to the retrieval stage, and that the reasoning stage, 
@@ -490,6 +535,12 @@ extraction is usually dependent on the previous evidence. The Select-to-Guide (S
 SOTA on HotpotQA.
 
 
+\begin{figure}[t] % 'h' for "here", can be replaced with other placement specifiers
+  \centering
+  \includegraphics[width=\linewidth]{fig/fig_general_pipeline.pdf} % Adjust 'width' as needed
+  \caption{The general pipeline for Graph-based approaches. Loops that are present in only some models are shown with a dotted line. Partially based on figures in \cite{RN165}}
+  \label{fig:general_pipeline} % For referencing the figure in the text
+\end{figure}
 %TODO: add a table summarizing the results of the various approaches if applicable on same dataset
 
 \subsection{Analysis of Multi-hop Datasets}
@@ -498,6 +549,14 @@ SOTA on HotpotQA.
 HotpotQA seems to be the de-facto dataset for evaluating MHRC models. However, there have been arguments that the dataset itself is flawed. 
 Several studies \cite{RN176, RN175, RN154, RN150} indicate that many questions in HotpotQA can be answered using heuristics, 
 as they have biases and reasoning shortcuts \cite{RN177}.
+
+The results of Chen and Durrett (2019) \cite{RN154} showed that more than half the questions in WikiHop and HotpotQA can be answered without
+multi-hop reasoning. Jiang and Bansal (2019) \cite{RN176} constructed adversarial examples that fooled models using reasoning shortcuts, and that
+there was significant degradation of performance for SOTA models. The experiments of Trivedi et al. (2020) \cite{RN175} also suggest that there is not
+much actual progress for MHRC models. They also formalize a framework for measuring the amount of disconnected reasoning.
+
+Since the current datasets are flawed, it is difficult to evaluate the effectiveness of graph-based approaches for MHRC. Further research is 
+required in constructing more challenging datasets and evaluating the effectiveness of graph-based approaches on these datasets.
 
 
 
