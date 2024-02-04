@@ -342,7 +342,7 @@ illustrates their effectiveness also in broader applications \cite{RN116}.
 \section{Core Concepts}
 %TODO
 \subsection{An Overview of Current approaches}
-For the purposes of understanding Graph based approaches, we will consider the following models:
+For the purposes of understanding Graph-based approaches, we will consider the following models:
 DFGN \cite{RN122}, HGN \cite{RN119}, CogQA \cite{RN118}, Gated-RGCN \cite{RN91}, AMGN \cite{RN131} and DRN \cite{RN142}. We will also evaluate 
 a couple of leading non-graph-based approaches: Beam Retrieval \cite{RN105} (Current SOTA for HotpotQA Distractor Setting),
 HopRetriever \cite{RN149} and Select-to-Guide (S2G) \cite{RN106}.
@@ -503,7 +503,7 @@ another set of self-attention layers are used to refine the answer span.
 
 \subsection{Evaluating the effectiveness of Graph-based approaches}
 
-For a long while, Graph based approaches were seen as the SOTA for MHRC. However, recently, there have been arguments as to whether GNNs 
+For a long while, Graph-based approaches were seen as the SOTA for MHRC. However, recently, there have been arguments as to whether GNNs 
 are actually necessary for MHRC. Looking at Table \ref{table:leaderboard_hotpotqa} on page \pageref{table:leaderboard_hotpotqa}, we can see 
 that the best performing models on the HotpotQA dataset \cite{RN116} are non-graph-based approaches \cite{RN105, RN149}.
 
@@ -535,6 +535,12 @@ extraction is usually dependent on the previous evidence. The Select-to-Guide (S
 SOTA on HotpotQA.
 
 
+\begin{figure}[t] % 'h' for "here", can be replaced with other placement specifiers
+  \centering
+  \includegraphics[width=\linewidth]{fig/fig_general_pipeline.pdf} % Adjust 'width' as needed
+  \caption{The general pipeline for Graph-based approaches. Loops that are present in only some models are shown with a dotted line. Partially based on figures in \cite{RN165}}
+  \label{fig:general_pipeline} % For referencing the figure in the text
+\end{figure}
 %TODO: add a table summarizing the results of the various approaches if applicable on same dataset
 
 \subsection{Analysis of Multi-hop Datasets}
